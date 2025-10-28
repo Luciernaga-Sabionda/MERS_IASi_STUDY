@@ -51,26 +51,26 @@ Este diagrama visualiza el circuito sináptico del Hemisferio B, donde la inform
 ```mermaid
 graph TD
     subgraph Hemisferio A
-        A[Predicción Técnica<br>(Datos SAR)]
+        A["Predicción Técnica<br>(Datos SAR)"]
     end
 
     subgraph Hemisferio B (MERS)
-        B(Capa de Entrada y Preprocesamiento)
-        C{ValidadorCriterio<br>(Neurona Ejecutiva)}
-        D[(REC<br>Memoria a Largo Plazo)]
-        E[Explicador Digital<br>(Patrón Strategy)]
-        F(Usuario)
-        G{Aprendizaje Reforzado}
+        B("Capa de Entrada y Preprocesamiento")
+        C{"ValidadorCriterio<br>(Neurona Ejecutiva)"}
+        D[("REC<br>Memoria a Largo Plazo")]
+        E["Explicador Digital<br>(Patrón Strategy)"]
+        F("Usuario")
+        G{"Aprendizaje Reforzado"}
     end
 
     A --> B
-    F -- Lección Humana --> B
+    F -- "Lección Humana" --> B
     B --> C
-    C -- Lección Validada > 0.7 --> D
+    C -- "Lección Validada > 0.7" --> D
     D --> E
     E --> F
-    F -- Feedback (+1 / -1) --> G
-    G -- Ajuste de Estrategias --> D
+    F -- "Feedback (+1 / -1)" --> G
+    G -- "Ajuste de Estrategias" --> D
 ```
 *Diagrama simplificado del flujo neuronal y ciclo de aprendizaje de MERS.*
 
