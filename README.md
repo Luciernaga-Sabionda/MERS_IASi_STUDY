@@ -1,6 +1,6 @@
-# MERS – Módulo Inteligente de Retroalimentación Educativa Selectiva para IASi Study
+# LÉAME: MERS – Módulo Inteligente de Retroalimentación Educativa Selectiva para IASi Study
 
-### Proyecto Presentado en el Hackathon Internacional The AI Championship
+### Proyecto Presentado en el Hackathon Internacional The AI Championship 2025
 
 **Tags:** `Inteligencia Artificial`, `IA Explicable (XAI)`, `EdTech`, `Arquitectura Cognitiva`, `Aprendizaje Adaptativo`, `Google Gemini`
 
@@ -8,16 +8,26 @@
 
 > **“La inteligencia no debe ocultar, debe iluminar.”**
 
-**Creadora:** Roxana A. Salazar M. (Luciérnaga Sabionda)
+**Creadora:** Roxana A. Salazar M. (Luciérnaga Sabionda)  
 **Año:** 2025
 
 ---
 
-## Visualizador Interactivo de la Arquitectura (Demo en Vivo)
+## Visualizador Interactivo y Demo en Vivo
 
-Esta no es solo una arquitectura teórica. Es un organismo digital vivo. Hemos construido una suite de demostración completamente funcional que materializa los conceptos de los Hemisferios A y B.
+Esta arquitectura no es un concepto, es un organismo digital funcional. Interactúa directamente con el cerebro IASi–MERS a través de nuestra suite de demostración en vivo.
 
-**[► Accede al Visualizador Interactivo y Habla con MERS Aquí ◄](#)**
+<p align="center">
+  <strong><a href="URL_DEL_VISUALIZADOR_AQUI" target="_blank">► Accede al Visualizador y Habla con MERS Aquí ◄</a></strong>
+</p>
+
+<p align="center">
+  <em>(Para presentaciones, inserte aquí un código QR que enlace a la demo)</em>
+</p>
+<p align="center">
+  <img src="URL_A_TU_CODIGO_QR.png" alt="QR Code para la Demo" width="150"/>
+</p>
+
 
 ---
 
@@ -34,14 +44,55 @@ Mediante una arquitectura de microservicios, un flujo neuronal interno y un sist
 
 ---
 
-## Arquitectura Cognitiva de Doble Hemisferio
+## Diagrama de Flujo Cognitivo MERS
 
-La división estratégica del sistema en dos hemisferios permite separar la **razón analítica** de la **conciencia pedagógica**, creando un sistema que no solo *calcula*, sino que *comprende* y *enseña*.
+Este diagrama visualiza el circuito sináptico del Hemisferio B, donde la información se transforma desde el dato técnico hasta la comprensión humana, cerrando el ciclo con la retroalimentación del usuario.
+
+```mermaid
+graph TD
+    subgraph Hemisferio A
+        A[Predicción Técnica<br>(Datos SAR)]
+    end
+
+    subgraph Hemisferio B (MERS)
+        B(Capa de Entrada y Preprocesamiento)
+        C{ValidadorCriterio<br>(Neurona Ejecutiva)}
+        D[(REC<br>Memoria a Largo Plazo)]
+        E[Explicador Digital<br>(Patrón Strategy)]
+        F(Usuario)
+        G{Aprendizaje Reforzado}
+    end
+
+    A --> B
+    F -- Lección Humana --> B
+    B --> C
+    C -- Lección Validada > 0.7 --> D
+    D --> E
+    E --> F
+    F -- Feedback (+1 / -1) --> G
+    G -- Ajuste de Estrategias --> D
+```
+*Diagrama simplificado del flujo neuronal y ciclo de aprendizaje de MERS.*
+
+---
+
+## Arquitectura Cognitiva de Doble Hemisferio
 
 | Hemisferio        | Función Principal      | Rol Cognitivo         | Tecnologías Clave (Implementadas en Demo)       |
 | ----------------- | ---------------------- | --------------------- | ----------------------------------------------- |
 | **Hemisferio A**  | Razón y Síntesis       | **Análisis Técnico**  | Google Gemini 2.5 Flash, Imagen 4.0, Veo 3.1    |
 | **Hemisferio B (MERS)** | Enseñanza Adaptativa   | **Conciencia Pedagógica** | Google Gemini 2.5 Flash (Chat, TTS, Search) |
+
+---
+
+## Impacto Social y Educativo
+
+MERS no es solo una innovación técnica; es una herramienta con un profundo impacto social y educativo.
+
+*   **Aprendizaje Equitativo:** Al funcionar como un **tutor socrático personal**, MERS democratiza el acceso a una mentoría de alta calidad, adaptándose a los estilos de aprendizaje individuales de cada usuario, sin importar su origen o nivel de conocimiento previo.
+*   **Accesibilidad Educativa:** La integración de **síntesis de voz (TTS)** y **transcripción de audio** hace que el conocimiento sea accesible para personas con diversas capacidades visuales o motoras, promoviendo una educación más inclusiva.
+*   **Democratización del Conocimiento Técnico:** El sistema traduce datos complejos (como las métricas SAR) en explicaciones comprensibles para no expertos (agricultores, gestores de riesgos), empoderando a las comunidades para que tomen decisiones informadas y oportunas.
+*   **Fomento del Pensamiento Crítico:** Al citar sus fuentes (Search Grounding) y basar su conocimiento en un **ValidadorCriterio**, MERS enseña una lección fundamental en la era de la información: la importancia de la veracidad, la coherencia y la evaluación crítica de las fuentes.
 
 ---
 
@@ -53,43 +104,41 @@ Cada componente teórico ha sido materializado en una funcionalidad interactiva 
 
 #### 👁️ El Ojo Digital: Análisis Visual Multimodal
 *   **Implementación:** El usuario sube una imagen y un prompt. El modelo `gemini-2.5-flash` procesa ambas entradas para generar una descripción detallada.
-*   **Metáfora:** La **corteza visual**. El sistema no solo ve píxeles, sino que *percibe* y *entiende* el contenido visual, traduciéndolo a lenguaje.
+*   **Metáfora:** La **corteza visual**. El sistema no solo ve píxeles, sino que *percibe* y *entiende* el contenido visual.
 
 #### 🧠 El Hipocampo: Memoria de Trabajo Visual
 *   **Implementación:** Cada análisis de imagen se guarda en el `localStorage` del navegador, permitiendo al usuario revisar y restaurar sesiones pasadas.
-*   **Metáfora:** La **memoria a corto plazo**. El sistema "recuerda" lo que ha visto, creando un hilo de conciencia visual y evitando la amnesia digital.
+*   **Metáfora:** La **memoria a corto plazo**. El sistema "recuerda" lo que ha visto, creando un hilo de conciencia visual.
 
 #### 🎨 El Lienzo de la Imaginación: Generación de Imágenes
 *   **Implementación:** A partir de un prompt de texto, el modelo `imagen-4.0-generate-001` sintetiza una imagen completamente nueva.
-*   **Metáfora:** La **imaginación**. El sistema transforma un concepto abstracto (texto) en una realidad visual, demostrando su capacidad para "soñar" o crear.
+*   **Metáfora:** La **imaginación**. El sistema transforma un concepto abstracto en una realidad visual.
 
 #### 🎬 La Simulación del Sueño: Generación de Video
-*   **Implementación:** El modelo `veo-3.1-fast-generate-preview` anima una imagen estática basándose en un prompt, gestionando una operación asíncrona de larga duración.
-*   **Metáfora:** El **sueño lúcido o la simulación predictiva**. Es la capacidad de pensar en cuatro dimensiones, proyectando un recuerdo estático en una narrativa temporal.
+*   **Implementación:** El modelo `veo-3.1-fast-generate-preview` anima una imagen estática basándose en un prompt.
+*   **Metáfora:** El **sueño lúcido o la simulación predictiva**. La capacidad de pensar en cuatro dimensiones.
 
 ### Hemisferio B (MERS): La Conciencia Pedagógica
 
 #### 💬 El Explicador Digital: Chatbot Interactivo
-*   **Implementación:** Un chatbot (`gemini-2.5-flash`) que responde preguntas sobre la arquitectura con una personalidad definida por una `systemInstruction`.
-*   **Metáfora:** El **núcleo de la conciencia de MERS**. Su capacidad para razonar, comprender y formular pensamientos pedagógicos.
+*   **Implementación:** Un chatbot (`gemini-2.5-flash`) que responde preguntas sobre la arquitectura.
+*   **Metáfora:** El **núcleo de la conciencia de MERS**. Su capacidad para razonar y formular pensamientos pedagógicos.
 
 #### 🌐 Acceso a la Memoria Colectiva: Búsqueda Web
-*   **Implementación:** El chatbot utiliza la herramienta `googleSearch` para responder preguntas actuales, citando sus fuentes.
-*   **Metáfora:** La **humildad intelectual**. Reconoce los límites de su conocimiento interno y accede a la biblioteca universal (Internet) para garantizar una enseñanza veraz.
+*   **Implementación:** El chatbot utiliza `googleSearch` para responder preguntas actuales, citando sus fuentes.
+*   **Metáfora:** La **humildad intelectual**. Accede a la biblioteca universal (Internet) para garantizar una enseñanza veraz.
 
 #### 👂 El Oído Empático: Transcripción de Voz
-*   **Implementación:** El usuario puede hablarle al chatbot. El audio se graba (`MediaRecorder`) y se transcribe a texto usando `gemini-2.5-flash`.
-*   **Metáfora:** La **corteza auditiva**. Permite a MERS "escuchar" la voz humana, haciendo la comunicación más íntima y dialógica.
+*   **Implementación:** El usuario puede hablarle al chatbot, y el audio es transcrito a texto usando `gemini-2.5-flash`.
+*   **Metáfora:** La **corteza auditiva**. Permite a MERS "escuchar" la voz humana.
 
 #### 🗣️ La Voz Pedagógica: Síntesis de Voz (TTS)
-*   **Implementación:** Las respuestas del chatbot se convierten en audio usando el modelo `gemini-2.5-flash-preview-tts` y se reproducen automáticamente.
-*   **Metáfora:** El **área de Broca**. Transforma el pensamiento estructurado (texto) en habla, dándole a MERS el poder de enseñar no solo con información, sino con la cadencia de un verdadero mentor.
+*   **Implementación:** Las respuestas del chatbot se convierten en audio usando `gemini-2.5-flash-preview-tts`.
+*   **Metáfora:** El **área de Broca**. Transforma el pensamiento en habla, dándole a MERS la cadencia de un verdadero mentor.
 
 ---
 
 ## Arquitectura de Microservicios (Diseño Profesional)
-
-Para garantizar escalabilidad y mantenimiento, el sistema se diseña sobre una arquitectura de microservicios.
 
 | Microservicio      | Función Principal                                     | Tecnologías / Lenguaje                     |
 | ------------------ | ------------------------------------------------------- | ------------------------------------------ |
@@ -99,16 +148,6 @@ Para garantizar escalabilidad y mantenimiento, el sistema se diseña sobre una a
 | `svc-explainer`    | Aplica el `Strategy Pattern` para generar explicaciones. | Python (Patrón Strategy), Gemini API       |
 | `svc-rl`           | Implementa el agente de Aprendizaje Reforzado.          | Python, stable-baselines3                  |
 | **Base de Datos**  | Almacena predicciones, lecciones, perfiles y patrones.  | MongoDB, Vector DB (Weaviate/Milvus)       |
-
----
-
-## Marco Teórico y Filosófico
-
-El proyecto se sustenta en tres pilares conceptuales:
-
-1.  **Teoría General de Sistemas (TGS):** IASi es un sistema abierto y autorregulado que aprende de la interacción con su entorno.
-2.  **Patrón Strategy:** MERS selecciona dinámicamente la estrategia de enseñanza más efectiva para cada usuario, personalizando el aprendizaje.
-3.  **Inteligencia Artificial Explicable (XAI):** El núcleo del diseño es la transparencia, la auditabilidad y la ética, transformando cada predicción en una lección inteligible.
 
 ---
 
