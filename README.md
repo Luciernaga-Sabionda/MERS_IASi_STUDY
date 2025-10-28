@@ -1,4 +1,4 @@
-# LÉAME: MERS – Módulo Inteligente de Retroalimentación Educativa Selectiva para IASi Study
+# MERS – Módulo Inteligente de Retroalimentación Educativa Selectiva para IASi Study
 
 ### Proyecto Presentado en el Hackathon Internacional The AI Championship
 
