@@ -1,5 +1,5 @@
 {
-  "name": "copy-of-iasi–mers-cognitive-architecture-visualizer",
+  "name": "",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "@google/genai": "^0.18.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

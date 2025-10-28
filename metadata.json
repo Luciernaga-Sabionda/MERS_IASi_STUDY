@@ -1,5 +1,8 @@
 {
-  "name": "Copy of IASi–MERS Cognitive Architecture Visualizer",
-  "description": "An interactive web application that visually explains the methodological design and software engineering of the IASi–MERS cognitive architecture, a dual-hemisphere AI system for adaptive education.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "name": "",
+  "description": ""
 }
