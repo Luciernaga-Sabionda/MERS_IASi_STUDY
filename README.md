@@ -50,11 +50,11 @@ Este diagrama visualiza el circuito sináptico del Hemisferio B, donde la inform
 
 ```mermaid
 graph TD
-    subgraph Hemisferio A
+    subgraph "Hemisferio A"
         A["Predicción Técnica<br>(Datos SAR)"]
     end
 
-    subgraph Hemisferio B (MERS)
+    subgraph "Hemisferio B (MERS)"
         B("Capa de Entrada y Preprocesamiento")
         C{"ValidadorCriterio<br>(Neurona Ejecutiva)"}
         D[("REC<br>Memoria a Largo Plazo")]
