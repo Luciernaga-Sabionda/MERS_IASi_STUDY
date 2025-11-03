@@ -48,12 +48,15 @@ export const Chatbot: React.FC = () => {
     setLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash",
-        systemInstruction: 'Eres un asistente útil para la aplicación "Visualizador de Arquitectura Cognitiva IASi–MERS". Responde preguntas sobre la arquitectura y sus componentes en español.'
-      });
-
-      const result = await model.generateContent(currentInput);
+      const model = genAI.getGenerativeModel({
+        model: "gemini-2.5-flash",
+        generationConfig: {
+          temperature: 0.9,
+          topP: 1,
+          topK: 1,
+          maxOutputTokens: 2048,
+        },
+      });      const result = await model.generateContent(currentInput);
       const response = await result.response;
       const text = response.text();
 
