@@ -1,15 +1,24 @@
 // Utilidad para manejar la configuración de la API de Google Gemini
+// Actualizado para The AI Championship 2025 - MERS Hackathon
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export const getGeminiClient = (): GoogleGenerativeAI | null => {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   
-  if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-    console.warn('API Key de Gemini no configurada');
+  if (!apiKey || apiKey === 'your_gemini_api_key_here' || apiKey === 'pendiente_configurar') {
+    console.warn('⚠️ API Key de Gemini no configurada o requiere OAuth2');
     return null;
   }
   
-  return new GoogleGenerativeAI(apiKey);
+  try {
+    // Intentar crear cliente con la API Key
+    const client = new GoogleGenerativeAI(apiKey);
+    console.log('✅ Google Gemini client inicializado para hackathon');
+    return client;
+  } catch (error) {
+    console.error('❌ Error inicializando Gemini client:', error);
+    return null;
+  }
 };
 
 export const isApiKeyConfigured = (): boolean => {
@@ -18,5 +27,15 @@ export const isApiKeyConfigured = (): boolean => {
 };
 
 export const getApiKeyMessage = (): string => {
-  return 'Para usar las funciones de IA, configura tu API Key de Google Gemini en el archivo .env:\n\n1. Obtén tu API Key en: https://makersuite.google.com/app/apikey\n2. Reemplaza "your_gemini_api_key_here" en el archivo .env con tu clave real\n3. Reinicia el servidor de desarrollo';
+  return `🏆 MERS Hackathon - Configuración Google API:
+
+STATUS: Tu API Key requiere OAuth2 (cuenta de servicio vinculada)
+
+SOLUCIÓN RÁPIDA para hackathon:
+1. Ve a: https://makersuite.google.com/app/apikey  
+2. Crea nueva API Key SIN cuenta de servicio
+3. Actualiza .env con la nueva key
+4. Reinicia servidor
+
+ALTERNATIVA: El sistema funcionará en modo simulado para demo`;
 };
