@@ -1,0 +1,8 @@
+{
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "name": "Copy of IASi–MERS Cognitive Architecture Visualizer",
+  "description": ""
+}
