@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header } from './components/Header';
+import { HackathonHeader } from './components/HackathonHeader';
 import { Section } from './components/Section';
 import { FlowDiagram } from './components/FlowDiagram';
 import { SynapticDiagram } from './components/SynapticDiagram';
@@ -17,6 +18,7 @@ function App() {
     <div className="bg-gray-900 text-gray-200 min-h-screen font-sans">
       <Header />
       <main className="container mx-auto px-4 py-8 md:px-8">
+        <HackathonHeader />
         
         <Section title="Arquitectura de Flujo Cognitivo" icon={<CogIcon className="w-8 h-8 md:w-10 md:h-10" />}>
           <p className="max-w-3xl mx-auto text-center text-gray-400 mb-12">

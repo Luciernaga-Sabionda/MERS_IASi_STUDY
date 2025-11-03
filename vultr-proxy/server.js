@@ -75,21 +75,68 @@ app.get('/api/demo/status', (req, res) => {
   });
 });
 
+// Endpoint específico para SmartMemory (REC) - Hackathon demo
+app.get('/api/smartmemory', (req, res) => {
+  // Simulación de datos para demo del hackathon
+  const mockSmartMemoryData = {
+    status: 'active',
+    type: 'RaindropSmartMemory',
+    bucket_id: 'mers-iasi-study-hackathon',
+    experiences: [
+      {
+        id: 'exp-001',
+        area: 'SAR_Analysis',
+        pattern: 'Detección de cambios en vegetación usando polarización VV',
+        confidence: 0.94,
+        impact: 0.87,
+        source: 'human',
+        timestamp: new Date().toISOString(),
+        raindrop_bucket: 'scientific-bumblebees-sar'
+      },
+      {
+        id: 'exp-002',
+        area: 'Hackathon_Integration',
+        pattern: 'Arquitectura híbrida Raindrop → Vultr → Google Cloud',
+        confidence: 0.96,
+        impact: 0.92,
+        source: 'ia',
+        timestamp: new Date().toISOString(),
+        raindrop_bucket: 'mers-hackathon-demo'
+      }
+    ],
+    stats: {
+      total: 127,
+      human_lessons: 78,
+      ai_predictions: 49,
+      avg_confidence: 0.89,
+      last_update: new Date().toISOString()
+    },
+    architecture: {
+      raindrop: 'connected',
+      vultr: 'active',
+      google_cloud: 'processing'
+    }
+  };
+  
+  res.json(mockSmartMemoryData);
+});
+
 // Proxy para el REC (Repositorio de Experiencias Contextuales)
 app.use('/api/rec', createProxyMiddleware({
-  target: 'https://your-google-cloud-mers.com', // Tu URL real de Google Cloud
+  target: process.env.GOOGLE_CLOUD_MERS_URL || 'https://your-google-cloud-mers.com',
   changeOrigin: true,
   pathRewrite: {
     '^/api/rec': '/mers/rec' // Reescribe la ruta si es necesario
   },
   onProxyReq: (proxyReq, req, res) => {
     // Agregar headers de autenticación si es necesario
-    proxyReq.setHeader('Authorization', `Bearer ${process.env.MERS_API_TOKEN}`);
-    proxyReq.setHeader('X-Proxy-Source', 'vultr-bridge');
+    proxyReq.setHeader('Authorization', `Bearer ${process.env.MERS_API_TOKEN || 'demo-token'}`);
+    proxyReq.setHeader('X-Proxy-Source', 'vultr-bridge-hackathon');
+    proxyReq.setHeader('X-Hackathon', 'AI-Championship-2025');
   },
   onProxyRes: (proxyRes, req, res) => {
-    // Log para debugging
-    console.log(`[${new Date().toISOString()}] REC Proxy: ${req.method} ${req.originalUrl} -> ${proxyRes.statusCode}`);
+    // Log para debugging y demo
+    console.log(`🔄 [${new Date().toISOString()}] REC Proxy: ${req.method} ${req.originalUrl} -> ${proxyRes.statusCode}`);
   },
   onError: (err, req, res) => {
     console.error('Proxy Error:', err);
