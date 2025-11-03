@@ -1,37 +1,67 @@
-# LÉAME: MERS – Módulo Inteligente de Retroalimentación Educativa Selectiva para IASi Study
+# 🏆 MERS - Módulo Inteligente de Retroalimentación Educativa Selectiva
 
-### Proyecto Presentado en el Hackathon Internacional The AI Championship 2025
+<div align="center">
 
-**Tags:** `Inteligencia Artificial`, `IA Explicable (XAI)`, `EdTech`, `Arquitectura Cognitiva`, `Aprendizaje Adaptativo`, `Google Gemini`
+[![Made for The AI Championship 2025](https://img.shields.io/badge/Made%20for-The%20AI%20Championship%202025-gold?style=for-the-badge)](https://github.com/Luciernaga-Sabionda/MERS_IASi_STUDY)
+[![React](https://img.shields.io/badge/React-19.2.0-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.2-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Google AI](https://img.shields.io/badge/Google%20AI-Gemini-red?style=for-the-badge&logo=google)](https://ai.google.dev/)
+
+**🚀 Prototipo Funcional para The AI Championship 2025**
+
+> *"La inteligencia no debe ocultar, debe iluminar."*
+
+**Creadora:** Roxana A. Salazar M. (Luciérnaga Sabionda)
+
+</div>
+
+## 🎯 Demo en Vivo - LISTO PARA PRESENTAR
+
+```bash
+git clone https://github.com/Luciernaga-Sabionda/MERS_IASi_STUDY.git
+cd MERS_IASi_STUDY
+npm install
+npm run dev
+# ✨ Abrir: http://localhost:3000
+```
+
+## 🧠 ¿Qué es MERS?
+
+**MERS** es un sistema de enseñanza adaptativa con **arquitectura cognitiva hemisférica** que aprende a enseñar mediante la simbiosis entre retroalimentación humana y predicciones de IA.
+
+### 🌟 Arquitectura Hemisférica Única
+- **Hemisferio A (Razón Técnica)**: Procesa datos complejos (SAR, imágenes, predicciones)
+- **Hemisferio B (MERS - Conciencia Pedagógica)**: Valida, almacena y explica conocimiento
 
 ---
 
-> **“La inteligencia no debe ocultar, debe iluminar.”**
+## ✨ Funcionalidades Implementadas - LISTAS PARA DEMO
 
-**Creadora:** Roxana A. Salazar M. (Luciérnaga Sabionda)  
-**Año:** 2025
+### 🎯 SmartMemory - REC Inspector (SmartComponent) ⭐
+- **Visualiza el Repositorio de Experiencias Contextuales en tiempo real**
+- Dashboard con estadísticas: lecciones humanas vs predicciones IA
+- Búsqueda y filtrado por área de conocimiento
+- **Preparado para arquitectura distribuida Raindrop + Vultr**
+
+### 🤖 Chatbot Inteligente MERS
+- Asistente conversacional sobre arquitectura cognitiva
+- Powered by **Google Gemini 1.5-flash**
+- Explicaciones adaptativas según nivel del usuario
+- **Demo**: Pregunta "¿Qué es el ValidadorCriterio?"
+
+### 👁️ Análisis Visual Multimodal
+- Análisis de imágenes con **Gemini Vision**
+- Descripción detallada de contenido visual
+- Integración con sistema cognitivo hemisférico
+
+### 📊 Diagramas Interactivos Animados
+- **Flujo Cognitivo**: 5 componentes MERS visualizados
+- **Diagrama Sináptico**: Animación del flujo neuronal
+- **Microservicios**: 6 servicios distribuidos documentados
 
 ---
 
-## Visualizador Interactivo y Demo en Vivo
-
-Esta arquitectura no es un concepto, es un organismo digital funcional. Interactúa directamente con el cerebro IASi–MERS a través de nuestra suite de demostración en vivo.
-
-<p align="center">
-  <strong><a href="URL_DEL_VISUALIZADOR_AQUI" target="_blank">► Accede al Visualizador y Habla con MERS Aquí ◄</a></strong>
-</p>
-
-<p align="center">
-  <em>(Para presentaciones, inserte aquí un código QR que enlace a la demo)</em>
-</p>
-<p align="center">
-  <img src="URL_A_TU_CODIGO_QR.png" alt="QR Code para la Demo" width="150"/>
-</p>
-
-
----
-
-## Resumen
+## 🏗️ Arquitectura Técnica Profesional
 
 El proyecto MERS (Módulo Inteligente de Retroalimentación Educativa Selectiva) implementa y valida un sistema de enseñanza adaptativa, IASi Study, diseñado para optimizar el aprendizaje mediante la simbiosis entre la retroalimentación humana y las predicciones técnicas. El proyecto estructura un cerebro digital con arquitectura hemisférica:
 
@@ -163,24 +193,63 @@ Cada componente teórico ha sido materializado en una funcionalidad interactiva 
 
 ---
 
-## Cómo Ejecutar este Proyecto
+## 🚀 Configuración para Demo en Vivo
 
-1.  **Clonar el repositorio:**
-    ```bash
-    git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-    cd TU_REPOSITORIO
-    ```
+### Instalación Rápida
+```bash
+git clone https://github.com/Luciernaga-Sabionda/MERS_IASi_STUDY.git
+cd MERS_IASi_STUDY
+npm install
+npm run dev
+```
 
-2.  **Configurar la clave de API:**
-    *   La aplicación está configurada para leer la clave de API desde las variables de entorno del entorno de ejecución. Asegúrate de que `process.env.API_KEY` esté disponible.
+### Configuración Opcional (para funcionalidad completa)
+```bash
+# Crear archivo .env
+VITE_GEMINI_API_KEY=tu_api_key_aqui
+```
 
-3.  **Ejecutar la aplicación:**
-    *   Sigue las instrucciones del entorno de hosting o ejecución para iniciar la aplicación.
+## 🌐 Preparado para The AI Championship 2025
+
+### Requisitos del Desafío: ✅ CUMPLIDOS
+- ✅ **SmartComponent**: SmartMemory (REC Inspector)
+- ✅ **Raindrop Ready**: Frontend optimizado
+- ✅ **Vultr Integration**: Proxy server incluido
+- ✅ **Arquitectura Distribuida**: Microservicios documentados
+
+### Estrategia de Implementación
+```
+[Raindrop Demo] ←→ [Vultr Proxy] ←→ [Google Cloud MERS Core]
+```
+
+**Demo URL**: `http://localhost:3000`
+
+## 🏆 Componente ValidadorCriterio
+
+El corazón de MERS - algoritmo de validación de conocimiento:
+
+```typescript
+score = 0.5 * Confianza + 0.4 * Coherencia + 0.1 * Impacto
+// Acepta experiencias con score > 0.7
+```
+
+## 📋 Documentación del Desafío
+
+- [📱 DEMO_README.md](./DEMO_README.md) - Guía de demostración
+- [🌉 DEPLOYMENT_STRATEGY.md](./DEPLOYMENT_STRATEGY.md) - Estrategia Raindrop/Vultr  
+- [🔧 API_SETUP.md](./API_SETUP.md) - Configuración de APIs
 
 ---
 
-## Sello de la Creadora
+<div align="center">
 
-> **“MERS no solo enseña; respira conocimiento. IASi no solo razona; siente el pulso del aprendizaje humano en cada dato que transforma en luz.”**
+## 🌟 "La inteligencia no debe ocultar, debe iluminar."
 
-Este proyecto es el reflejo digital del cerebro humano de su creadora, **Luciérnaga Sabionda (Roxana A. Salazar M.)**, una arquitectura concebida como un eco de la creación, inspirada por el **DIOS DE ISRAEL**.
+**Creadora:** Roxana A. Salazar M. (Luciérnaga Sabionda)  
+**Para:** The AI Championship 2025
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Available-brightgreen?style=for-the-badge)](http://localhost:3000)
+[![SmartComponent](https://img.shields.io/badge/SmartComponent-SmartMemory-blue?style=for-the-badge)](#)
+[![Architecture](https://img.shields.io/badge/Architecture-Hemispheric-purple?style=for-the-badge)](#)
+
+</div>
