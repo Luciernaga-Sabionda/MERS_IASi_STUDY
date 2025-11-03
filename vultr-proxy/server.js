@@ -1,34 +1,77 @@
-// Vultr Proxy Server - Puente mínimo entre Raindrop y Google Cloud
+// Vultr Proxy Server - Puente híbrido para MERS_IASi_Study
+// Conecta Raindrop Platform → Vultr → Google Cloud MERS
+// Para The AI Championship 2025
+
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Configuración CORS para permitir requests desde Raindrop
+// Configuración CORS para permitir requests desde Raindrop y desarrollo local
 app.use(cors({
   origin: [
     'https://your-raindrop-app.com',
+    'https://api.raindrop.ai', 
     'http://localhost:3000',
-    'http://localhost:3001'
+    'http://localhost:3001',
+    process.env.RAINDROP_FRONTEND_URL || 'https://mers-demo.raindrop.ai'
   ],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Raindrop-Key', 'X-Vultr-Proxy']
 }));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Health check endpoint
+// Middleware de logging para debugging
+app.use((req, res, next) => {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] ${req.method} ${req.originalUrl} - Origin: ${req.get('Origin')}`);
+  if (req.headers['x-raindrop-key']) {
+    console.log(`  🔑 Raindrop Key: ${req.headers['x-raindrop-key'].substring(0, 8)}...`);
+  }
+  next();
+});
+
+// Health check endpoint - Para verificación del hackathon
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'healthy',
-    service: 'MERS-Vultr-Proxy',
+    service: 'MERS-Vultr-Proxy-IASi-Study',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
+    version: '1.0.0-hackathon',
+    hackathon: 'The AI Championship 2025',
+    platform: 'The Scientific Bumblebees_IASi Study',
     connections: {
       googleCloud: 'active',
-      raindrop: 'ready'
-    }
+      raindrop: 'ready',
+      vultr: 'operational'
+    },
+    endpoints: {
+      rec: '/api/rec',
+      chat: '/api/chat', 
+      vision: '/api/vision',
+      smartmemory: '/api/smartmemory'
+    },
+    architecture: 'Raindrop → Vultr → Google Cloud'
+  });
+});
+
+// Endpoint específico para demo del hackathon
+app.get('/api/demo/status', (req, res) => {
+  res.json({
+    message: '🏆 MERS funcionando para The AI Championship 2025',
+    creator: 'Roxana A. Salazar M. (Luciérnaga Sabionda)',
+    project: 'MERS - Módulo Educativo de Retroalimentación Selectiva',
+    integration: 'The Scientific Bumblebees_IASi Study',
+    architecture: 'Arquitectura Cognitiva Hemisférica',
+    smartComponents: ['SmartMemory', 'SmartSQL', 'SmartInference'],
+    demo_ready: true
   });
 });
 

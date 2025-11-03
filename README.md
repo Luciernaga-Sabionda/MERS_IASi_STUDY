@@ -29,19 +29,29 @@ npm run dev
 
 **MERS** es un sistema de enseñanza adaptativa con **arquitectura cognitiva hemisférica** que aprende a enseñar mediante la simbiosis entre retroalimentación humana y predicciones de IA.
 
+> **🎯 NOTA IMPORTANTE:** Este es un **prototipo funcional específicamente adaptado** para **The Scientific Bumblebees_IASi Study** y optimizado para cumplir los requisitos de **The AI Championship 2025**. La implementación completa está diseñada para integrarse con la plataforma educativa IASi Study.
+
 ### 🌟 Arquitectura Hemisférica Única
 - **Hemisferio A (Razón Técnica)**: Procesa datos complejos (SAR, imágenes, predicciones)
 - **Hemisferio B (MERS - Conciencia Pedagógica)**: Valida, almacena y explica conocimiento
+- **🔬 Integración IASi Study**: Diseñado específicamente para The Scientific Bumblebees platform
 
 ---
 
 ## ✨ Funcionalidades Implementadas - LISTAS PARA DEMO
 
-### 🎯 SmartMemory - REC Inspector (SmartComponent) ⭐
+### � **Arquitectura Híbrida para Hackathon** ⭐⭐⭐
+- **Dashboard completo**: Monitoreo Raindrop → Vultr → Google Cloud
+- **Logs en tiempo real**: Visualización de conexiones entre plataformas
+- **SmartComponents simulados**: Preparados para migración a Raindrop oficial
+- **Status indicators**: Estados de conexión para todas las plataformas
+
+### �🎯 SmartMemory - REC Inspector (SmartComponent) ⭐
 - **Visualiza el Repositorio de Experiencias Contextuales en tiempo real**
 - Dashboard con estadísticas: lecciones humanas vs predicciones IA
 - Búsqueda y filtrado por área de conocimiento
-- **Preparado para arquitectura distribuida Raindrop + Vultr**
+- **Compatible con Raindrop**: Modo Raindrop activado por defecto
+- **Vultr Integration**: Configurado para proxy server
 
 ### 🤖 Chatbot Inteligente MERS
 - Asistente conversacional sobre arquitectura cognitiva

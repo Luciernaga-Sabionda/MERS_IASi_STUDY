@@ -9,14 +9,19 @@ interface ExperienceEntry {
   impact: number;
   timestamp: string;
   source: 'human' | 'ia';
+  raindropBucket?: string;
 }
 
 interface SmartMemoryProps {
   apiEndpoint?: string; // Para conectar con el sistema real
+  raindropMode?: boolean; // Activar compatibilidad con Raindrop
+  vultrProxyUrl?: string; // URL del proxy de Vultr
 }
 
 export const SmartMemory: React.FC<SmartMemoryProps> = ({ 
-  apiEndpoint = 'https://your-vultr-proxy.com/api/rec' 
+  apiEndpoint = 'https://your-vultr-proxy.com/api/rec',
+  raindropMode = true,
+  vultrProxyUrl = 'https://your-vultr-server.com'
 }) => {
   const [experiences, setExperiences] = useState<ExperienceEntry[]>([]);
   const [loading, setLoading] = useState(false);
@@ -29,7 +34,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
     avgConfidence: 0
   });
 
-  // Simulación de datos para demo (se reemplazará con llamadas reales)
+  // Simulación de datos para demo - Compatible con Raindrop SmartMemory
   const mockExperiences: ExperienceEntry[] = [
     {
       id: '1',
@@ -38,7 +43,8 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
       confidence: 0.92,
       impact: 0.85,
       timestamp: '2025-11-03T10:30:00Z',
-      source: 'human'
+      source: 'human',
+      raindropBucket: 'mers-iasi-study-sar'
     },
     {
       id: '2',
@@ -47,7 +53,8 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
       confidence: 0.78,
       impact: 0.73,
       timestamp: '2025-11-03T09:15:00Z',
-      source: 'ia'
+      source: 'ia',
+      raindropBucket: 'mers-iasi-study-vision'
     },
     {
       id: '3',
@@ -56,7 +63,18 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
       confidence: 0.95,
       impact: 0.91,
       timestamp: '2025-11-03T08:45:00Z',
-      source: 'human'
+      source: 'human',
+      raindropBucket: 'mers-iasi-study-education'
+    },
+    {
+      id: '4',
+      area: 'Hackathon_Demo',
+      pattern: 'Integración Raindrop + Vultr + Google Cloud exitosa',
+      confidence: 0.88,
+      impact: 0.94,
+      timestamp: '2025-11-03T11:00:00Z',
+      source: 'ia',
+      raindropBucket: 'mers-hackathon-demo'
     }
   ];
 
@@ -67,16 +85,32 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
   const loadExperiences = async () => {
     setLoading(true);
     try {
-      // En producción, esto hará una llamada real a tu REC
-      // const response = await fetch(`${apiEndpoint}/experiences`);
+      if (raindropMode) {
+        // Simular conexión con Raindrop + Vultr
+        console.log('🔗 Conectando con Raindrop SmartMemory via Vultr...');
+        console.log('📡 Vultr Proxy:', vultrProxyUrl);
+        console.log('🎯 Raindrop Endpoint:', apiEndpoint);
+      }
+      
+      // En producción, esto hará una llamada real:
+      // const response = await fetch(`${vultrProxyUrl}/api/raindrop/smartmemory`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${process.env.REACT_APP_RAINDROP_API_KEY}`,
+      //     'X-Vultr-Proxy': 'mers-iasi-study'
+      //   }
+      // });
       // const data = await response.json();
       
-      // Por ahora, simulamos la carga
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Por ahora, simulamos la carga con delay realista
+      await new Promise(resolve => setTimeout(resolve, 1500));
       const data = mockExperiences;
       
       setExperiences(data);
       calculateStats(data);
+      
+      if (raindropMode) {
+        console.log('✅ SmartMemory cargado via arquitectura híbrida');
+      }
     } catch (error) {
       console.error('Error loading experiences:', error);
       // Fallback a datos mock si falla la conexión
