@@ -14,11 +14,11 @@ export interface RaindropSmartMemoryProps {
 // Simulación de SmartMemory de Raindrop
 export const RaindropSmartMemory: React.FC<RaindropSmartMemoryProps> = ({
   endpoint = 'https://api.raindrop.ai/smartmemory',
-  apiKey = process.env.REACT_APP_RAINDROP_API_KEY,
+  apiKey = import.meta.env.VITE_RAINDROP_API_KEY,
   bucketId = 'mers-iasi-study',
   onDataUpdate
 }) => {
-  const [memories, setMemories] = useState([]);
+  const [memories, setMemories] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [connected, setConnected] = useState(false);
 

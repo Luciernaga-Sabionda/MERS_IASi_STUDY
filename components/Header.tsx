@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { ApiStatus } from './ApiStatus';
 
 export const Header: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ export const Header: React.FC = () => {
         <h2 className="text-center text-lg md:text-xl text-gray-400 mt-1">
           Visualizador de Arquitectura Cognitiva IASi–MERS
         </h2>
+        <div className="mt-3 flex justify-center"><ApiStatus /></div>
       </div>
     </header>
   );

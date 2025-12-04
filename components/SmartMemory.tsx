@@ -19,9 +19,9 @@ interface SmartMemoryProps {
 }
 
 export const SmartMemory: React.FC<SmartMemoryProps> = ({ 
-  apiEndpoint = 'https://your-vultr-proxy.com/api/rec',
+  apiEndpoint = '/api/raindrop',
   raindropMode = true,
-  vultrProxyUrl = 'https://your-vultr-server.com'
+  vultrProxyUrl = import.meta.env.VITE_VULTR_PROXY_URL || 'http://localhost:3001'
 }) => {
   const [experiences, setExperiences] = useState<ExperienceEntry[]>([]);
   const [loading, setLoading] = useState(false);
@@ -86,20 +86,35 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
     setLoading(true);
     try {
       if (raindropMode) {
-        // Simular conexión con Raindrop + Vultr
         console.log('🔗 Conectando con Raindrop SmartMemory via Vultr...');
         console.log('📡 Vultr Proxy:', vultrProxyUrl);
         console.log('🎯 Raindrop Endpoint:', apiEndpoint);
+        console.log('🔑 API Key:', 'MERS-IASi-STUDY');
       }
       
-      // En producción, esto hará una llamada real:
-      // const response = await fetch(`${vultrProxyUrl}/api/raindrop/smartmemory`, {
-      //   headers: {
-      //     'Authorization': `Bearer ${process.env.REACT_APP_RAINDROP_API_KEY}`,
-      //     'X-Vultr-Proxy': 'mers-iasi-study'
-      //   }
-      // });
-      // const data = await response.json();
+      // Llamada real a Raindrop Platform via Vultr Proxy
+      try {
+        const response = await fetch(`${vultrProxyUrl}/api/proxy/raindrop/smartmemory`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': 'MERS-IASi-STUDY',
+            'x-project-id': 'mers-iasi-study',
+            'x-hackathon': 'ai-championship-2025'
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          console.log('✅ Datos reales de Raindrop recibidos:', data);
+          setExperiences(data.experiences || mockExperiences);
+          calculateStats(data.experiences || mockExperiences);
+          return;
+        } else {
+          console.warn('⚠️ Raindrop API no disponible, usando datos mock');
+        }
+      } catch (apiError) {
+        console.warn('⚠️ Error conectando con Raindrop, usando fallback:', apiError);
+      }
       
       // Por ahora, simulamos la carga con delay realista
       await new Promise(resolve => setTimeout(resolve, 1500));

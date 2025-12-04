@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { SpinnerIcon, GlobeAltIcon } from './Icons';
+import { SpinnerIcon } from './Icons';
 
 interface Message {
   role: 'user' | 'model';
@@ -12,34 +11,42 @@ export const Chatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [genAI, setGenAI] = useState<GoogleGenerativeAI | null>(null);
+  const [proxyOk, setProxyOk] = useState<boolean | null>(null);
+  const [missingKey, setMissingKey] = useState<boolean>(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isOpen && !genAI) {
-      try {
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-          setMessages([{ role: 'model', text: 'Lo siento, no se ha configurado la clave de API de Gemini. Por favor, configura VITE_GEMINI_API_KEY en tu archivo .env' }]);
-          return;
-        }
-        const ai = new GoogleGenerativeAI(apiKey);
-        setGenAI(ai);
-        setMessages([{ role: 'model', text: 'Hola! ¿En qué puedo ayudarte con la arquitectura MERS?' }]);
-      } catch (e) {
-        console.error("Failed to initialize Gemini:", e);
-        setMessages([{ role: 'model', text: 'Lo siento, no pude iniciar el chat. Revisa la configuración de la API.' }]);
-      }
+    if (isOpen) {
+      // Mostramos saludo inicial. La verificación de la API key ocurre en el backend.
+      setMessages([{ role: 'model', text: '¡Hola! Soy tu asistente de IA. Puedo ayudarte con preguntas sobre el proyecto MERS-IASi o cualquier otra cosa. ¿En qué puedo asistirte?' }]);
     }
-  }, [isOpen, genAI]);
+  }, [isOpen]);
+
+  // Poll de salud del proxy para habilitar/deshabilitar el envío
+  useEffect(() => {
+    let cancelled = false;
+    const check = async () => {
+      try {
+        const resp = await fetch('/api/health');
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const j = await resp.json();
+        if (!cancelled) { setProxyOk(true); setMissingKey(!!j?.missingApiKey); }
+      } catch {
+        if (!cancelled) setProxyOk(false);
+      }
+    };
+    check();
+    const id = setInterval(check, 10000);
+    return () => { cancelled = true; clearInterval(id); };
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const handleSend = async () => {
-    if (!input.trim() || !genAI || loading) return;
+    if (!input.trim() || loading || proxyOk === false || missingKey) return;
 
     const userMessage: Message = { role: 'user', text: input };
     setMessages((prev) => [...prev, userMessage]);
@@ -48,23 +55,35 @@ export const Chatbot: React.FC = () => {
     setLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
-        generationConfig: {
-          temperature: 0.9,
-          topP: 1,
-          topK: 1,
-          maxOutputTokens: 2048,
-        },
-      });      const result = await model.generateContent(currentInput);
-      const response = await result.response;
-      const text = response.text();
+      // Llamamos al backend proxy que realiza la llamada segura a Gemini
+      const resp = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: currentInput })
+      });
 
-      const modelMessage: Message = { 
-        role: 'model', 
-        text: text
-      };
+      if (!resp.ok) {
+        const errText = await resp.text();
+        throw new Error(`Server error ${resp.status}: ${errText}`);
+      }
 
+      const body = await resp.json();
+      let text = body.text || 'Lo siento, no obtuve respuesta.';
+
+      // Corrección de off-topic similar a la anterior
+      const askedAboutMERS = currentInput.toLowerCase().includes('mers');
+      const isOffTopic = askedAboutMERS && (
+        text.toLowerCase().includes('hipoteca') || 
+        text.toLowerCase().includes('mortgage') || 
+        text.toLowerCase().includes('coronavirus') ||
+        text.toLowerCase().includes('respiratorio')
+      );
+
+      if (isOffTopic) {
+        text = `MERS-IASi es nuestro proyecto para The AI Championship 2025. Es un sistema de inteligencia artificial para análisis de imágenes satelitales SAR con arquitectura híbrida (React + Vultr + Raindrop + Google Cloud). Se enfoca en educación geoespacial y análisis de datos satelitales. ¿Te gustaría saber más sobre algún aspecto específico?`;
+      }
+
+      const modelMessage: Message = { role: 'model', text };
       setMessages((prev) => [...prev, modelMessage]);
     } catch (e) {
       console.error(e);
@@ -113,23 +132,39 @@ export const Chatbot: React.FC = () => {
             ))}
             {loading && (
               <div className="flex justify-start">
-                  <div className="bg-gray-700 text-gray-200 p-2 rounded-lg">
-                      <SpinnerIcon className="w-5 h-5" />
-                  </div>
+                <div className="bg-gray-700 text-gray-200 p-2 rounded-lg">
+                  <SpinnerIcon className="animate-spin h-5 w-5 text-white" />
+                </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
-          <div className="p-2 border-t border-gray-700">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Escribe un mensaje..."
-              disabled={loading}
-              className="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500 disabled:opacity-50"
-            />
+          <div className="p-3 border-t border-gray-700">
+            <div className="flex space-x-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Escribe tu mensaje..."
+                className="flex-1 bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                disabled={loading || proxyOk === false || missingKey}
+              />
+              <button
+                onClick={handleSend}
+                disabled={loading || proxyOk === false || missingKey}
+                title={proxyOk === false ? 'Proxy no disponible. Inicia npm run server.' : (missingKey ? 'API key ausente. Exporta VITE_GEMINI_API_KEY.' : '')}
+                className="bg-violet-600 text-white px-4 py-2 rounded-md hover:bg-violet-500 disabled:bg-violet-800 disabled:cursor-not-allowed"
+              >
+                Enviar
+              </button>
+            </div>
+            {proxyOk === false && (
+              <p className="text-xs text-red-400 mt-2">Proxy no disponible. Inicia el backend con <code>npm run server</code>.</p>
+            )}
+            {missingKey && (
+              <p className="text-xs text-yellow-300 mt-2">API key ausente. Define <code>VITE_GEMINI_API_KEY</code> en la terminal antes de iniciar el servidor.</p>
+            )}
           </div>
         </div>
       )}

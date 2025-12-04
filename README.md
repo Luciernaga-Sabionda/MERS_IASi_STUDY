@@ -213,11 +213,33 @@ npm install
 npm run dev
 ```
 
-### Configuración Opcional (para funcionalidad completa)
-```bash
-# Crear archivo .env
-VITE_GEMINI_API_KEY=tu_api_key_aqui
+### Configuración de entorno (para funcionalidad completa)
+```pwsh
+# Opción A: archivo .env
+cp .env.example .env
+# Edita .env y añade tus claves
+
+# Opción B: exportar en la sesión de PowerShell
+$env:VITE_GEMINI_API_KEY = "<TU_API_KEY_DE_GEMINI>"
+$env:VITE_RAINDROP_API_KEY = "<TU_API_KEY_DE_RAINDROP>"
 ```
+
+### Arranque
+```pwsh
+# Solo UI
+npm run dev
+
+# Solo backend
+npm run server
+
+# Ambos
+npm run start
+```
+
+Estados en cabecera:
+- Verde: Proxy conectado.
+- Amarillo: Proxy conectado pero falta `VITE_GEMINI_API_KEY`.
+- Rojo: Proxy caído (levanta `npm run server`).
 
 ## 🌐 Preparado para The AI Championship 2025
 
