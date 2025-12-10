@@ -6,9 +6,28 @@ const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const cors = require('cors');
 require('dotenv').config();
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// --- INICIO: LÓGICA DE CHATBOT (GEMINI) ---
+const API_KEY = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
+if (!API_KEY) {
+  console.warn('Warning: GOOGLE_API_KEY or GEMINI_API_KEY not found in environment. Chatbot will not work.');
+}
+
+let geminiClient = null;
+if (API_KEY) {
+  try {
+    geminiClient = new GoogleGenerativeAI(API_KEY);
+    console.log('GoogleGenerativeAI client initialized for production proxy.');
+  } catch (e) {
+    console.error('Failed to init GoogleGenerativeAI:', e);
+  }
+}
+// --- FIN: LÓGICA DE CHATBOT (GEMINI) ---
+
 
 // Configuración CORS para permitir requests desde Raindrop y desarrollo local
 app.use(cors({
@@ -44,7 +63,7 @@ app.get('/api/health', (req, res) => {
     service: 'MERS-Vultr-Proxy-IASi-Study',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    version: '1.0.0-hackathon',
+    version: '1.0.1-hackathon',
     hackathon: 'The AI Championship 2025',
     platform: 'The Scientific Bumblebees_IASi Study',
     connections: {
@@ -148,20 +167,40 @@ app.use('/api/rec', createProxyMiddleware({
   }
 }));
 
-// Proxy para el Chatbot/Gemini
-app.use('/api/chat', createProxyMiddleware({
-  target: 'https://your-google-cloud-mers.com',
-  changeOrigin: true,
-  pathRewrite: {
-    '^/api/chat': '/mers/chat'
-  },
-  onProxyReq: (proxyReq, req, res) => {
-    proxyReq.setHeader('Authorization', `Bearer ${process.env.MERS_API_TOKEN}`);
-    proxyReq.setHeader('X-Proxy-Source', 'vultr-bridge');
-  }
-}));
+// --- INICIO: ENDPOINT REAL DEL CHATBOT ---
+app.post('/api/chat', async (req, res) => {
+  try {
+    const prompt = (req.body && req.body.prompt) ? req.body.prompt : '';
+    if (!geminiClient) {
+      return res.status(500).send('Gemini API client not initialized on server. Check API Key.');
+    }
 
-// Proxy para análisis de imágenes
+    const model = geminiClient.getGenerativeModel({
+      model: 'gemini-1.5-flash',
+      generationConfig: {
+        temperature: 0.8,
+        topP: 1,
+        topK: 1,
+        maxOutputTokens: 1024
+      },
+      systemInstruction: `Eres un asistente inteligente para el proyecto MERS-IASi para The AI Championship 2025. Tu objetivo es responder preguntas sobre el proyecto, su arquitectura (React, Vultr, Raindrop, Google Cloud), y sus objetivos. Sé claro, conciso y útil.`
+    });
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    console.log('Chatbot generated text length:', (text || '').length);
+    res.json({ text });
+  } catch (err) {
+    console.error('Error calling Gemini via production proxy:', err);
+    res.status(500).send(err.message || 'Internal server error in /api/chat');
+  }
+});
+// --- FIN: ENDPOINT REAL DEL CHATBOT ---
+
+
+// Proxy para análisis de imágenes (marcador de posición)
 app.use('/api/vision', createProxyMiddleware({
   target: 'https://your-google-cloud-mers.com',
   changeOrigin: true,

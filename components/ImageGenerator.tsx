@@ -18,11 +18,8 @@ export const ImageGenerator: React.FC = () => {
     setImageUrl(null);
 
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-        setError('No se ha configurado la clave de API de Gemini. Por favor, configura VITE_GEMINI_API_KEY en tu archivo .env');
-        return;
-      }
+        // La clave de Gemini no debe estar en el frontend; el backend gestiona el secreto.
+        const apiKey = ''; // Placeholder for backend API key
 
       // Nota: Google Generative AI no soporta generación de imágenes directamente
       // Esta es una simulación para demostración

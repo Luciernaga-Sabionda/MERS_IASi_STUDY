@@ -14,15 +14,25 @@ NC='\033[0m'
 # Verificar Google API
 echo -e "\n📡 Verificando Google Gemini API..."
 if [ -n "$GOOGLE_API_KEY" ]; then
-    response=$(curl -s "https://generativelanguage.googleapis.com/v1/models?key=$GOOGLE_API_KEY")
-    if echo "$response" | grep -q "models"; then
-        echo -e "${GREEN}✅ Google Gemini API - FUNCIONANDO${NC}"
+    # Captura la respuesta (body) y el código de estado (status)
+    RESPONSE_INFO=$(curl -s -w "%{http_code}" "https://generativelanguage.googleapis.com/v1/models?key=$GOOGLE_API_KEY")
+    HTTP_CODE="${RESPONSE_INFO: -3}"
+    RESPONSE_BODY="${RESPONSE_INFO: 0:$((${#RESPONSE_INFO}-3))}"
+
+    if [ "$HTTP_CODE" = "200" ] && echo "$RESPONSE_BODY" | grep -q "models"; then
+        echo -e "${GREEN}✅ Google Gemini API - FUNCIONANDO (HTTP 200)${NC}"
     else
-        echo -e "${RED}❌ Google Gemini API - ERROR${NC}"
-        echo "Response: $response"
+        echo -e "${RED}❌ Google Gemini API - ERROR (HTTP $HTTP_CODE)${NC}"
+        
+        # Manejo específico del error 429
+        if [ "$HTTP_CODE" = "429" ]; then
+            echo -e "${RED}⚠️ POSIBLE ERROR DE CUOTA/LÍMITE. Revisa el uso de la API en Google AI Studio.${NC}"
+        else
+            echo "Respuesta detallada: $RESPONSE_BODY"
+        fi
     fi
 else
-    echo -e "${YELLOW}⚠️  GOOGLE_API_KEY no configurado${NC}"
+    echo -e "${YELLOW}⚠️ GOOGLE_API_KEY no configurado${NC}"
     echo "   Ve a: https://makersuite.google.com/app/apikey"
 fi
 
@@ -38,23 +48,23 @@ if [ -n "$VULTR_API_TOKEN" ]; then
         echo "Response: $response"
     fi
 else
-    echo -e "${YELLOW}⚠️  VULTR_API_TOKEN no configurado${NC}"
+    echo -e "${YELLOW}⚠️ VULTR_API_TOKEN no configurado${NC}"
     echo "   Ve a: https://my.vultr.com/settings/#settingsapi"
 fi
 
 # Verificar Raindrop/LiquidMetal API
-echo -e "\n💧 Verificando Raindrop API..."
 if [ -n "$RAINDROP_API_KEY" ]; then
-    # Intentar llamada básica (el endpoint exacto puede variar)
-    response=$(curl -s -H "Authorization: Bearer $RAINDROP_API_KEY" "https://api.liquidmetal.run/v1/health" || echo "endpoint_not_found")
+    echo -e "\n💧 Verificando Raindrop API..."
+    # Intenta la llamada, utilizando 'x-api-key' en lugar de Bearer como práctica común de LiquidMetal
+    response=$(curl -s -H "x-api-key: $RAINDROP_API_KEY" "https://api.liquidmetal.run/v1/health" || echo "endpoint_not_found")
     if [ "$response" != "endpoint_not_found" ]; then
         echo -e "${GREEN}✅ Raindrop API - FUNCIONANDO${NC}"
     else
-        echo -e "${YELLOW}⚠️  Raindrop API - Endpoint no encontrado (normal en fase beta)${NC}"
+        echo -e "${YELLOW}⚠️ Raindrop API - Endpoint no encontrado (normal en fase beta)${NC}"
         echo "   Token configurado: ${RAINDROP_API_KEY:0:8}..."
     fi
 else
-    echo -e "${YELLOW}⚠️  RAINDROP_API_KEY no configurado${NC}"
+    echo -e "${YELLOW}⚠️ RAINDROP_API_KEY no configurado${NC}"
     echo "   Ve a: https://liquidmetal.run → API Keys o StarterKit"
 fi
 
@@ -72,7 +82,7 @@ if [ -n "$VULTR_API_TOKEN" ]; then
             echo "$instances" | grep -E '"label"|"main_ip"' | sed 's/.*"label": *"\([^"]*\)".*/   - \1/' | head -5
         fi
     else
-        echo -e "${YELLOW}⚠️  No hay instancias activas en Vultr${NC}"
+        echo -e "${YELLOW}⚠️ No hay instancias activas en Vultr${NC}"
         echo "   Crea una instancia para el proxy server"
     fi
 fi

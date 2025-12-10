@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import multer from 'multer';
 
 // Manejadores de errores globales
 process.on('uncaughtException', (err) => {
@@ -12,11 +13,25 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('❌ Unhandled Rejection:', reason);
 });
 
-// Configuración
+// Configuración: preferir `.env.local` si existe, luego `.env`
+try {
+  dotenv.config({ path: '.env.local' });
+} catch {}
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  fileFilter: (req, file, cb) => {
+    const allowed = ['image/png', 'image/jpeg'];
+    if (!allowed.includes(file.mimetype)) {
+      return cb(new Error('Tipo de archivo no permitido. Usa PNG o JPEG.'));
+    }
+    cb(null, true);
+  }
+});
 
 // API Key setup
 const API_KEY = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || process.env.REACT_APP_GOOGLE_API_KEY;
@@ -209,11 +224,58 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
+// Image analysis endpoint (multipart/form-data)
+app.post('/api/analyze-image', upload.single('image'), async (req, res) => {
+  const startedAt = Date.now();
+  try {
+    if (!client || !API_KEY) {
+      return res.json({ text: 'Backend sin API key: usando explicación genérica. Sube una imagen y te describiré posibles contenidos.', fallback: true });
+    }
+
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ error: 'No se recibió archivo de imagen' });
+    }
+
+    const ai = client;
+    const model = ai.getGenerativeModel({ model: 'gemini-1.5-pro' });
+
+    const base64Data = file.buffer.toString('base64');
+    const imagePart = {
+      inlineData: {
+        mimeType: file.mimetype,
+        data: base64Data,
+      },
+    };
+
+    const result = await model.generateContent([
+      'Describe esta imagen en detalle y destaca elementos clave visibles.',
+      imagePart,
+    ]);
+    const response = await result.response;
+    const text = response.text();
+    const durationMs = Date.now() - startedAt;
+    console.log(`🖼️ Analyze OK | type=${file.mimetype} size=${file.size}B duration=${durationMs}ms`);
+    return res.json({ text, source: 'gemini' });
+  } catch (err) {
+    const message = err?.message || 'Error desconocido';
+    const isUserError = message.includes('Tipo de archivo no permitido') || message.includes('File too large');
+    console.error('❌ Error analizando imagen:', message);
+    const file = req.file;
+    if (file) {
+      const durationMs = Date.now() - startedAt;
+      console.log(`🖼️ Analyze FAIL | type=${file.mimetype} size=${file.size}B duration=${durationMs}ms reason=${message}`);
+    }
+    return res.status(isUserError ? 400 : 500).json({ error: isUserError ? 'Solicitud inválida' : 'Error al analizar la imagen', message });
+  }
+});
+
 // Start server
-const PORT = process.env.PROXY_PORT || 3002;
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Proxy server listening on http://localhost:${PORT}`);
+const PORT = process.env.PORT || process.env.PROXY_PORT || 3002;
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Proxy server listening on port ${PORT}`);
   console.log(`📊 Status: ${client ? '✅ Ready' : '⚠️  API key missing'}`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
 // Graceful shutdown

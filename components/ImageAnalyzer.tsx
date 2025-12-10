@@ -50,33 +50,16 @@ export const ImageAnalyzer: React.FC = () => {
     setAnalysis(null);
 
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-        setError('No se ha configurado la clave de API de Gemini. Por favor, configura VITE_GEMINI_API_KEY en tu archivo .env');
-        return;
-      }
+      // Enviar la imagen al backend para análisis seguro (sin exponer claves)
+      const form = new FormData();
+      form.append('image', image);
 
-      const ai = new GoogleGenerativeAI(apiKey);
-      const model = ai.getGenerativeModel({ model: "gemini-2.5-flash" });
-      
-      const imageBase64 = await blobToBase64(image);
-
-      const imagePart = {
-        inlineData: {
-          mimeType: image.type,
-          data: imageBase64,
-        },
-      };
-
-      // Generar contenido con la imagen
-      const result = await model.generateContent([
-        "Describe esta imagen en detalle.",
-        imagePart
-      ]);
-      
-      const response = await result.response;
-      const text = response.text();
-      setAnalysis(text);
+      const resp = await fetch('/api/analyze-image', {
+        method: 'POST',
+        body: form
+      });
+      const data = await resp.json();
+      setAnalysis(data.text || data.error || 'Análisis no disponible.');
 
     } catch (e: any) {
       console.error(e);

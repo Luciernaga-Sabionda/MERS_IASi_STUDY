@@ -82,17 +82,18 @@ export const VideoGenerator: React.FC = () => {
     setLoadingMessage('Inicializando generación de video...');
 
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-        setError('No se ha configurado la clave de API de Gemini. Por favor, configura VITE_GEMINI_API_KEY en tu archivo .env');
-        return;
-      }
+      // La clave de Gemini no debe estar en el frontend; el backend gestiona el secreto.
 
-      // Nota: Google Generative AI no soporta generación de video directamente
-      // Esta es una simulación para demostración
-      setError('La generación de video requiere configuración adicional con APIs específicas como Veo o similares.');
+      // Solicitar una narración desde el backend (demo) usando /api/generate
+      const resp = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: `Genera una breve narración para un video a partir de esta descripción: ${prompt}` })
+      });
+      const data = await resp.json();
+      const narration = data.text || 'Narración no disponible.';
       
-      // Simulación de video generado para demo
+      // Simulación de video generado para demo (sin exponer claves)
       setTimeout(() => {
         setGeneratedVideoUrl('https://www.w3schools.com/html/mov_bbb.mp4');
         setLoading(false);
