@@ -5,7 +5,7 @@ console.log('🚀 INICIANDO TEST DE INTEGRACIÓN HACKATHON...\n');
 
 const testConfigs = {
   google: {
-    apiKey: process.env.VITE_GEMINI_API_KEY || 'AIzaSyDBGcEdg3CIcaE7LVl9lTgPrK1eUidWGqM',
+    apiKey: process.env.VITE_GEMINI_API_KEY || 'YOUR_API_KEY_HERE',
     endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent'
   },
   raindrop: {

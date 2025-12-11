@@ -11,7 +11,7 @@ Las siguientes claves fueron expuestas en el repositorio público y **DEBEN SER 
 **Pasos:**
 1. Ve a [Google Cloud Console](https://console.cloud.google.com/)
 2. Navega a: APIs & Services → Credentials
-3. Encuentra la API key expuesta: `AIzaSyDBGcEdg3CIcaE7LVl9lTgPrK1eUidWGqM`
+3. Encuentra cualquier API key expuesta
 4. Elimínala y crea una nueva
 5. Actualiza tu archivo `.env` local con la nueva clave
 
