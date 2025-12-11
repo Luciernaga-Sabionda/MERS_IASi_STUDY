@@ -48,10 +48,6 @@ try {
     Write-Host "🔄 Ejecuta: `.\check-vultr-server.ps1` para verificar estado"
     
 } catch {
-    Write-Host "❌ Error creando servidor:" -ForegroundColor Red
-    # Imprimir el error de forma más detallada
-    $errorDetails = $_.Exception.Response.GetResponseStream()
-    $reader = New-Object System.IO.StreamReader($errorDetails)
-    $errorText = $reader.ReadToEnd()
-    Write-Host "Respuesta de la API: $errorText"
+    Write-Host "Error creando servidor:" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
 }

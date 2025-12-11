@@ -3,6 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import multer from 'multer';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import { initRaindropMCP, callRaindropTool, getRaindropStatus, closeRaindropMCP } from './raindrop-mcp-client.js';
 
 // Manejadores de errores globales
 process.on('uncaughtException', (err) => {
@@ -52,20 +55,24 @@ if (API_KEY) {
 
 // Health endpoints
 app.get('/health', (req, res) => {
+  const raindropStatus = getRaindropStatus();
   res.json({
     status: 'OK',
     timestamp: new Date().toISOString(),
     missingApiKey: !API_KEY,
-    clientReady: !!client
+    clientReady: !!client,
+    raindropMCP: raindropStatus
   });
 });
 
 app.get('/api/health', (req, res) => {
+  const raindropStatus = getRaindropStatus();
   res.json({
     status: 'OK',
     timestamp: new Date().toISOString(),
     missingApiKey: !API_KEY,
-    clientReady: !!client
+    clientReady: !!client,
+    raindropMCP: raindropStatus
   });
 });
 
@@ -270,25 +277,68 @@ app.post('/api/analyze-image', upload.single('image'), async (req, res) => {
   }
 });
 
+// Raindrop MCP SmartComponents endpoint
+app.post('/api/raindrop/tool', async (req, res) => {
+  const { toolName, args } = req.body;
+  
+  if (!toolName) {
+    return res.status(400).json({ error: 'toolName requerido' });
+  }
+
+  try {
+    const raindropStatus = getRaindropStatus();
+    if (!raindropStatus.connected) {
+      return res.status(503).json({ 
+        error: 'Raindrop MCP no conectado', 
+        message: 'El servidor MCP de Raindrop no está disponible'
+      });
+    }
+
+    const result = await callRaindropTool(toolName, args || {});
+    res.json({ 
+      success: true, 
+      toolName, 
+      result,
+      source: 'raindrop-mcp'
+    });
+  } catch (err) {
+    console.error('❌ Error llamando Raindrop tool:', err);
+    res.status(500).json({ 
+      error: 'Error ejecutando SmartComponent', 
+      message: err.message 
+    });
+  }
+});
+
 // Start server
 const PORT = process.env.PORT || process.env.PROXY_PORT || 3002;
-const server = app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', async () => {
   console.log(`🚀 Proxy server listening on port ${PORT}`);
   console.log(`📊 Status: ${client ? '✅ Ready' : '⚠️  API key missing'}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  
+  // Inicializar Raindrop MCP
+  try {
+    await initRaindropMCP();
+    console.log('🌧️ Raindrop MCP integrado exitosamente');
+  } catch (error) {
+    console.warn('⚠️  Raindrop MCP no disponible (continuando sin él):', error.message);
+  }
 });
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
+process.on('SIGTERM', async () => {
   console.log('👋 SIGTERM received, closing server...');
+  await closeRaindropMCP();
   server.close(() => {
     console.log('Server closed');
     process.exit(0);
   });
 });
 
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
   console.log('\n👋 SIGINT received, closing server...');
+  await closeRaindropMCP();
   server.close(() => {
     console.log('Server closed');
     process.exit(0);
