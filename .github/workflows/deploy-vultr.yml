@@ -1,0 +1,40 @@
+name: Deploy to Vultr
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy to Vultr
+        env:
+          VULTR_HOST: 207.148.31.144
+          VULTR_PASSWORD: ${{ secrets.VULTR_PASSWORD }}
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+          RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
+        run: |
+          sudo apt-get install -y sshpass
+          sshpass -p "$VULTR_PASSWORD" ssh -o StrictHostKeyChecking=no root@$VULTR_HOST << 'ENDSSH'
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          apt-get install -y nodejs git
+          npm install -g pm2
+          mkdir -p /var/www && cd /var/www
+          rm -rf mers
+          git clone https://github.com/Luciernaga-Sabionda/MERS_IASi_STUDY.git mers
+          cd mers
+          npm install --production
+          cat > .env << EOF
+          VITE_GEMINI_API_KEY=$GEMINI_KEY
+          RAINDROP_TEST_TOKEN=$RAINDROP_TOKEN
+          RAINDROP_TOKEN=$RAINDROP_TOKEN
+          PORT=3002
+          NODE_ENV=production
+          EOF
+          ufw --force enable && ufw allow 22 && ufw allow 3002
+          pm2 stop mers-backend || true
+          pm2 start server/proxy-server-fixed.js --name mers-backend
+          pm2 save
+          ENDSSH
