@@ -4,10 +4,10 @@ export const VultrArchitecture: React.FC = () => {
   return (
     <div className="bg-gray-800 rounded-lg p-6 max-w-4xl mx-auto">
       <div className="space-y-6">
-        {/* Título */}
+        {/* Title */}
         <div className="text-center mb-8">
-          <h3 className="text-2xl font-bold text-blue-400 mb-2">Arquitectura de Despliegue</h3>
-          <p className="text-gray-400">Backend desplegado en Vultr para inferencia y persistencia</p>
+          <h3 className="text-2xl font-bold text-blue-400 mb-2">Deployment Architecture</h3>
+          <p className="text-gray-400">Backend deployed on Vultr for inference and persistence</p>
         </div>
 
         {/* Diagrama de flujo */}
@@ -20,13 +20,13 @@ export const VultrArchitecture: React.FC = () => {
               <p className="text-sm text-purple-200">Frontend + SmartComponents</p>
               <div className="mt-3 text-xs text-purple-300">
                 • React + TypeScript<br/>
-                • SmartMemory (REC)<br/>
+                • SmartMemory (CER)<br/>
                 • Chatbot UI
               </div>
             </div>
           </div>
 
-          {/* Flecha */}
+          {/* Arrow */}
           <div className="text-yellow-400 text-3xl rotate-90 md:rotate-0">→</div>
 
           {/* Vultr Backend */}
@@ -39,7 +39,7 @@ export const VultrArchitecture: React.FC = () => {
                 • Express Server<br/>
                 • Raindrop MCP Client<br/>
                 • API Proxy<br/>
-                • Persistencia REC
+                • CER Persistence
               </div>
               <div className="mt-3 px-3 py-1 bg-yellow-400 text-gray-900 rounded text-xs font-bold">
                 207.148.31.144:3002
@@ -66,34 +66,34 @@ export const VultrArchitecture: React.FC = () => {
           </div>
         </div>
 
-        {/* Beneficios de Vultr */}
+        {/* Vultr Benefits */}
         <div className="bg-gray-900 rounded-lg p-4 mt-6">
-          <h4 className="font-bold text-cyan-400 mb-3 text-center">🎯 ¿Por qué Vultr?</h4>
+          <h4 className="font-bold text-cyan-400 mb-3 text-center">🎯 Why Vultr?</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div className="text-center">
               <div className="text-2xl mb-2">⚡</div>
-              <div className="font-semibold text-white">Baja Latencia</div>
-              <div className="text-gray-400 text-xs mt-1">SSD NVMe para inferencia rápida</div>
+              <div className="font-semibold text-white">Low Latency</div>
+              <div className="text-gray-400 text-xs mt-1">NVMe SSD for fast inference</div>
             </div>
             <div className="text-center">
               <div className="text-2xl mb-2">🔒</div>
-              <div className="font-semibold text-white">Seguridad</div>
-              <div className="text-gray-400 text-xs mt-1">API keys protegidas en backend</div>
+              <div className="font-semibold text-white">Security</div>
+              <div className="text-gray-400 text-xs mt-1">API keys protected in backend</div>
             </div>
             <div className="text-center">
               <div className="text-2xl mb-2">💾</div>
-              <div className="font-semibold text-white">Persistencia</div>
-              <div className="text-gray-400 text-xs mt-1">REC almacenado en servidor</div>
+              <div className="font-semibold text-white">Persistence</div>
+              <div className="text-gray-400 text-xs mt-1">CER stored on server</div>
             </div>
           </div>
         </div>
 
-        {/* Status en vivo */}
+        {/* Live status */}
         <div className="bg-gray-900 rounded-lg p-4 border-l-4 border-green-500">
           <div className="flex items-center justify-between">
             <div>
-              <div className="font-bold text-white">Estado del Backend Vultr</div>
-              <div className="text-sm text-gray-400">Servidor activo y respondiendo</div>
+              <div className="font-bold text-white">Vultr Backend Status</div>
+              <div className="text-sm text-gray-400">Server active and responding</div>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>

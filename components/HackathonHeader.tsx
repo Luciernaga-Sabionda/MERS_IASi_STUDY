@@ -19,12 +19,12 @@ export const HackathonHeader: React.FC = () => {
         
         <div className="bg-gray-900/50 p-4 rounded-lg border border-yellow-600">
           <h2 className="text-xl font-semibold text-cyan-300 mb-2">
-            MERS - Arquitectura Cognitiva Hemisférica
+            MERS - Hemispheric Cognitive Architecture
           </h2>
           <p className="text-gray-300 text-sm mb-3">
-            Sistema educativo adaptativo con <strong>Repositorio de Experiencias Contextuales (REC)</strong>
+            Adaptive educational system with <strong>Contextual Experience Repository (CER)</strong>
             <br />
-            Diseñado específicamente para <strong>The Scientific Bumblebees_IASi Study</strong>
+            Specifically designed for <strong>The Scientific Bumblebees_IASi Study</strong>
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
@@ -44,9 +44,9 @@ export const HackathonHeader: React.FC = () => {
         </div>
         
         <div className="mt-4 text-yellow-200 text-sm">
-          <strong>Creadora:</strong> Roxana A. Salazar M. (Luciérnaga Sabionda) 
+          <strong>Creator:</strong> Roxana A. Salazar M. (Luciérnaga Sabionda) 
           <span className="mx-2">|</span>
-          <strong>Categoría:</strong> Emprendedor Individual + Mejor Idea General
+          <strong>Category:</strong> Individual Entrepreneur + Best Overall Idea
         </div>
       </div>
     </div>

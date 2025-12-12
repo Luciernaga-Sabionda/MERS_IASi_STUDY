@@ -42,7 +42,7 @@ export const ImageAnalyzer: React.FC = () => {
 
   const handleAnalyzeClick = async () => {
     if (!image) {
-      setError('Por favor, sube una imagen para analizar.');
+      setError('Please upload an image to analyze.');
       return;
     }
     setLoading(true);
@@ -59,11 +59,11 @@ export const ImageAnalyzer: React.FC = () => {
         body: form
       });
       const data = await resp.json();
-      setAnalysis(data.text || data.error || 'Análisis no disponible.');
+      setAnalysis(data.text || data.error || 'Analysis not available.');
 
     } catch (e: any) {
       console.error(e);
-      setError('Hubo un error al analizar la imagen. Por favor, inténtalo de nuevo.');
+      setError('There was an error analyzing the image. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -90,7 +90,7 @@ export const ImageAnalyzer: React.FC = () => {
               ) : (
                 <div className="text-center text-gray-500">
                   <PhotoIcon className="w-16 h-16 mx-auto" />
-                  <p>Haz clic para subir una imagen</p>
+                  <p>Click to upload an image</p>
                 </div>
               )}
             </div>
@@ -100,13 +100,13 @@ export const ImageAnalyzer: React.FC = () => {
                 className="w-full bg-cyan-600 text-white font-bold py-2 px-4 rounded-md hover:bg-cyan-500 disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
             >
                 {loading ? <SpinnerIcon className="w-5 h-5 mr-2" /> : <EyeIcon className="w-5 h-5 mr-2" />}
-                {loading ? 'Analizando...' : 'Analizar Imagen'}
+                {loading ? 'Analyzing...' : 'Analyze Image'}
             </button>
         </div>
 
         {/* Analysis Result Area */}
         <div className="relative w-full h-96 bg-gray-900/50 rounded-lg p-4 border border-gray-600 overflow-y-auto">
-            <h4 className="font-bold text-lg text-gray-200 mb-2">Análisis de la Imagen:</h4>
+            <h4 className="font-bold text-lg text-gray-200 mb-2">Image Analysis:</h4>
             {loading ? (
                 <div className="flex items-center justify-center h-full text-gray-500">
                     <SpinnerIcon className="w-8 h-8" />
@@ -114,7 +114,7 @@ export const ImageAnalyzer: React.FC = () => {
             ) : analysis ? (
                 <p className="text-gray-300 text-sm whitespace-pre-wrap">{analysis}</p>
             ) : (
-                <p className="text-gray-500 text-sm italic">El análisis de la imagen aparecerá aquí.</p>
+                <p className="text-gray-500 text-sm italic">The image analysis will appear here.</p>
             )}
         </div>
       </div>

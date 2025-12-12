@@ -3,14 +3,14 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { PhotoIcon, SpinnerIcon } from './Icons';
 
 export const ImageGenerator: React.FC = () => {
-  const [prompt, setPrompt] = useState<string>('Un astronauta montando a caballo en Marte, estilo fotorrealista.');
+  const [prompt, setPrompt] = useState<string>('An astronaut riding a horse on Mars, photorealistic style.');
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleGenerateClick = async () => {
     if (!prompt) {
-      setError('Por favor, introduce una descripción para generar la imagen.');
+      setError('Please enter a description to generate the image.');
       return;
     }
     setLoading(true);
@@ -21,18 +21,18 @@ export const ImageGenerator: React.FC = () => {
         // La clave de Gemini no debe estar en el frontend; el backend gestiona el secreto.
         const apiKey = ''; // Placeholder for backend API key
 
-      // Nota: Google Generative AI no soporta generación de imágenes directamente
-      // Esta es una simulación para demostración
-      setError('La generación de imágenes requiere configuración adicional con APIs específicas como DALL-E o Imagen.');
+      // Note: Google Generative AI does not support image generation directly
+      // This is a simulation for demonstration
+      setError('Image generation requires additional configuration with specific APIs like DALL-E or Imagen.');
       
-      // Simulación de imagen generada para demo
+      // Simulated generated image for demo
       setTimeout(() => {
-        setImageUrl('https://via.placeholder.com/512x512/4F46E5/FFFFFF?text=Imagen+Generada');
+        setImageUrl('https://via.placeholder.com/512x512/4F46E5/FFFFFF?text=Generated+Image');
         setLoading(false);
       }, 2000);
     } catch (e) {
       console.error(e);
-      setError('Hubo un error al generar la imagen. Por favor, inténtalo de nuevo.');
+      setError('There was an error generating the image. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -46,14 +46,14 @@ export const ImageGenerator: React.FC = () => {
           {loading ? (
             <div className="text-center text-gray-500">
               <SpinnerIcon className="w-16 h-16 mx-auto" />
-              <p>Generando imagen...</p>
+              <p>Generating image...</p>
             </div>
           ) : imageUrl ? (
             <img src={imageUrl} alt="Generated" className="w-full h-full object-contain rounded-lg" />
           ) : (
             <div className="text-center text-gray-500">
               <PhotoIcon className="w-16 h-16 mx-auto" />
-              <p>La imagen generada aparecerá aquí</p>
+              <p>Generated image will appear here</p>
             </div>
           )}
         </div>
@@ -62,7 +62,7 @@ export const ImageGenerator: React.FC = () => {
         <div className="flex flex-col space-y-4">
           <div>
             <label htmlFor="image-prompt" className="block text-sm font-medium text-gray-300 mb-2">
-              Describe la imagen a generar:
+              Describe the image to generate:
             </label>
             <textarea
               id="image-prompt"
@@ -70,7 +70,7 @@ export const ImageGenerator: React.FC = () => {
               onChange={(e) => setPrompt(e.target.value)}
               rows={4}
               className="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              placeholder="Ej: Un zorro cyberpunk en una ciudad de neón."
+              placeholder="E.g.: A cyberpunk fox in a neon city."
             />
           </div>
           <button
@@ -79,7 +79,7 @@ export const ImageGenerator: React.FC = () => {
             className="w-full bg-cyan-600 text-white font-bold py-2 px-4 rounded-md hover:bg-cyan-500 disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
           >
             {loading ? <SpinnerIcon className="w-5 h-5 mr-2" /> : null}
-            {loading ? 'Generando...' : 'Generar Imagen'}
+            {loading ? 'Generating...' : 'Generate Image'}
           </button>
         </div>
       </div>

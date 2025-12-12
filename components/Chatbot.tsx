@@ -18,8 +18,8 @@ export const Chatbot: React.FC = () => {
 
   useEffect(() => {
     if (isOpen) {
-      // Mostramos saludo inicial. La verificación de la API key ocurre en el backend.
-      setMessages([{ role: 'model', text: '¡Hola! Soy tu asistente de IA. Puedo ayudarte con preguntas sobre el proyecto MERS-IASi o cualquier otra cosa. ¿En qué puedo asistirte?' }]);
+      // Show initial greeting. API key verification happens in the backend.
+      setMessages([{ role: 'model', text: 'Hello! I\'m your AI assistant. I can help you with questions about the MERS-IASi project or anything else. How can I assist you?' }]);
     }
   }, [isOpen]);
 
@@ -87,7 +87,7 @@ export const Chatbot: React.FC = () => {
       setMessages((prev) => [...prev, modelMessage]);
     } catch (e) {
       console.error(e);
-      const errorMessage: Message = { role: 'model', text: 'Lo siento, ocurrió un error. Inténtalo de nuevo.' };
+      const errorMessage: Message = { role: 'model', text: 'Sorry, an error occurred. Please try again.' };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setLoading(false);
@@ -116,7 +116,7 @@ export const Chatbot: React.FC = () => {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-80 h-[28rem] bg-gray-800 rounded-lg shadow-2xl flex flex-col z-50 border border-gray-700">
           <header className="bg-gray-900 p-3 rounded-t-lg">
-            <h3 className="font-bold text-white text-center">Asistente de Arquitectura</h3>
+            <h3 className="font-bold text-white text-center">Architecture Assistant</h3>
           </header>
           <div className="flex-1 p-4 overflow-y-auto space-y-4">
             {messages.map((msg, index) => (
@@ -146,24 +146,24 @@ export const Chatbot: React.FC = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Escribe tu mensaje..."
+                placeholder="Type your message..."
                 className="flex-1 bg-gray-700 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500"
                 disabled={loading || proxyOk === false || missingKey}
               />
               <button
                 onClick={handleSend}
                 disabled={loading || proxyOk === false || missingKey}
-                title={proxyOk === false ? 'Proxy no disponible. Inicia npm run server.' : (missingKey ? 'API key ausente. Exporta VITE_GEMINI_API_KEY.' : '')}
+                title={proxyOk === false ? 'Proxy not available. Start npm run server.' : (missingKey ? 'API key missing. Export VITE_GEMINI_API_KEY.' : '')}
                 className="bg-violet-600 text-white px-4 py-2 rounded-md hover:bg-violet-500 disabled:bg-violet-800 disabled:cursor-not-allowed"
               >
-                Enviar
+                Send
               </button>
             </div>
             {proxyOk === false && (
-              <p className="text-xs text-red-400 mt-2">Proxy no disponible. Inicia el backend con <code>npm run server</code>.</p>
+              <p className="text-xs text-red-400 mt-2">Proxy not available. Start the backend with <code>npm run server</code>.</p>
             )}
             {missingKey && (
-              <p className="text-xs text-yellow-300 mt-2">API key ausente. Define <code>VITE_GEMINI_API_KEY</code> en la terminal antes de iniciar el servidor.</p>
+              <p className="text-xs text-yellow-300 mt-2">API key missing. Define <code>VITE_GEMINI_API_KEY</code> in the terminal before starting the server.</p>
             )}
           </div>
         </div>

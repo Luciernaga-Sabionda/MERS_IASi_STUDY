@@ -41,59 +41,59 @@ export const RaindropDemo: React.FC = () => {
   return (
     <div className="bg-gray-800 rounded-lg p-6 max-w-4xl mx-auto">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-purple-400 mb-2">🔗 Integración Raindrop MCP en Vivo</h3>
-        <p className="text-gray-400">18 herramientas MCP disponibles - Prueba en tiempo real</p>
+        <h3 className="text-2xl font-bold text-purple-400 mb-2">🔗 Live Raindrop MCP Integration</h3>
+        <p className="text-gray-400">18 MCP tools available - Real-time testing</p>
       </div>
 
-      {/* Tabs de acciones */}
+      {/* Action tabs */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        {/* Listar Colecciones */}
+        {/* List Collections */}
         <div className="bg-gray-900 rounded-lg p-4">
-          <h4 className="font-bold text-white mb-3">📚 Listar Colecciones</h4>
+          <h4 className="font-bold text-white mb-3">📚 List Collections</h4>
           <button
             onClick={() => callRaindropTool('list-collections', {})}
             disabled={loading}
             className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 text-white py-2 px-4 rounded transition-colors font-semibold"
           >
-            {loading ? <SpinnerIcon className="w-5 h-5 mx-auto" /> : 'Obtener Colecciones'}
+            {loading ? <SpinnerIcon className="w-5 h-5 mx-auto" /> : 'Get Collections'}
           </button>
         </div>
 
-        {/* Crear Colección */}
+        {/* Create Collection */}
         <div className="bg-gray-900 rounded-lg p-4">
-          <h4 className="font-bold text-white mb-3">➕ Crear Colección</h4>
+          <h4 className="font-bold text-white mb-3">➕ Create Collection</h4>
           <input
             type="text"
             value={collectionName}
             onChange={(e) => setCollectionName(e.target.value)}
             className="w-full bg-gray-700 text-white px-3 py-2 rounded mb-2 text-sm"
-            placeholder="Nombre de colección"
+            placeholder="Collection name"
           />
           <button
             onClick={() => callRaindropTool('create-collection', { title: collectionName })}
             disabled={loading || !collectionName}
             className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white py-2 px-4 rounded transition-colors font-semibold"
           >
-            {loading ? <SpinnerIcon className="w-5 h-5 mx-auto" /> : 'Crear'}
+            {loading ? <SpinnerIcon className="w-5 h-5 mx-auto" /> : 'Create'}
           </button>
         </div>
 
-        {/* Buscar Raindrops */}
+        {/* Search Raindrops */}
         <div className="bg-gray-900 rounded-lg p-4">
-          <h4 className="font-bold text-white mb-3">🔍 Buscar Raindrops</h4>
+          <h4 className="font-bold text-white mb-3">🔍 Search Raindrops</h4>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-gray-700 text-white px-3 py-2 rounded mb-2 text-sm"
-            placeholder="Buscar..."
+            placeholder="Search..."
           />
           <button
             onClick={() => callRaindropTool('search-raindrops', { query: searchQuery })}
             disabled={loading || !searchQuery}
             className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white py-2 px-4 rounded transition-colors font-semibold"
           >
-            {loading ? <SpinnerIcon className="w-5 h-5 mx-auto" /> : 'Buscar'}
+            {loading ? <SpinnerIcon className="w-5 h-5 mx-auto" /> : 'Search'}
           </button>
         </div>
       </div>

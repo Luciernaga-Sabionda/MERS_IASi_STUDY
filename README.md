@@ -15,15 +15,66 @@
 
 </div>
 
-## 🎯 Demo en Vivo - LISTO PARA PRESENTAR
+## 🚀 Instalación y Configuración
 
+### 1️⃣ Clonar el Repositorio
 ```bash
 git clone https://github.com/Luciernaga-Sabionda/MERS_IASi_STUDY.git
 cd MERS_IASi_STUDY
 npm install
-npm run dev
-# ✨ Abrir: http://localhost:3000
 ```
+
+### 2️⃣ Configurar API Key de Google Gemini
+
+#### **📝 Obtener tu API Key:**
+1. Visita [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Inicia sesión con tu cuenta de Google
+3. Haz clic en "Create API Key"
+4. Copia tu clave (empieza con `AIza...`)
+
+#### **⚙️ Configurar en el Proyecto:**
+```bash
+# Copiar archivo de ejemplo
+cp .env.example .env
+
+# Editar el archivo .env y reemplazar:
+# VITE_GEMINI_API_KEY=your_gemini_api_key_here
+# con tu clave real:
+VITE_GEMINI_API_KEY=AIzaSy... (tu clave aquí)
+```
+
+#### **🔐 Ubicación del Archivo:**
+El archivo `.env` debe estar en la **raíz del proyecto**:
+```
+MERS_IASi_STUDY/
+├── .env          ← Aquí (tu archivo con la clave real)
+├── .env.example  ← Plantilla
+├── package.json
+├── src/
+└── ...
+```
+
+### 3️⃣ Iniciar la Aplicación
+```bash
+npm start
+# ✨ Frontend: http://localhost:5173
+# 🔧 Backend: http://localhost:3002
+```
+
+### ⚠️ Troubleshooting
+
+**Problema:** "API Key ausente" o "missingApiKey: true"
+- ✅ Verifica que el archivo `.env` existe en la raíz
+- ✅ Verifica que la variable se llama `VITE_GEMINI_API_KEY`
+- ✅ Reinicia el servidor después de editar `.env`
+
+**Problema:** "Invalid API Key"
+- ✅ Verifica que copiaste la clave completa (sin espacios)
+- ✅ Genera una nueva clave en [AI Studio](https://aistudio.google.com/app/apikey)
+
+**Problema:** Tailwind CSS no carga
+- ✅ Ejecuta: `npm install @tailwindcss/vite`
+- ✅ Reinicia el servidor
 
 ## 🧠 ¿Qué es MERS?
 

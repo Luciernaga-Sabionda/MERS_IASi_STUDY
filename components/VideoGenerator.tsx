@@ -17,7 +17,7 @@ const blobToBase64 = (blob: Blob): Promise<string> => {
 export const VideoGenerator: React.FC = () => {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [prompt, setPrompt] = useState<string>('Un dron vuela lentamente a través de la escena.');
+  const [prompt, setPrompt] = useState<string>('A drone flies slowly through the scene.');
   const [aspectRatio, setAspectRatio] = useState<'16:9' | '9:16'>('16:9');
   const [generatedVideoUrl, setGeneratedVideoUrl] = useState<string | null>(null);
   
@@ -72,26 +72,26 @@ export const VideoGenerator: React.FC = () => {
 
   const handleGenerateClick = async () => {
     if (!image || !prompt) {
-      setError('Por favor, sube una imagen y escribe una descripción.');
+      setError('Please upload an image and write a description.');
       return;
     }
 
     setLoading(true);
     setError(null);
     setGeneratedVideoUrl(null);
-    setLoadingMessage('Inicializando generación de video...');
+    setLoadingMessage('Initializing video generation...');
 
     try {
       // La clave de Gemini no debe estar en el frontend; el backend gestiona el secreto.
 
-      // Solicitar una narración desde el backend (demo) usando /api/generate
+      // Request narration from backend (demo) using /api/generate
       const resp = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: `Genera una breve narración para un video a partir de esta descripción: ${prompt}` })
+        body: JSON.stringify({ prompt: `Generate a brief narration for a video from this description: ${prompt}` })
       });
       const data = await resp.json();
-      const narration = data.text || 'Narración no disponible.';
+      const narration = data.text || 'Narration not available.';
       
       // Simulación de video generado para demo (sin exponer claves)
       setTimeout(() => {
@@ -114,14 +114,14 @@ export const VideoGenerator: React.FC = () => {
         }
       });
       
-      setLoadingMessage('Procesando video... Esto puede tardar varios minutos. Por favor, mantén esta pestaña abierta.');
+      setLoadingMessage('Processing video... This may take several minutes. Please keep this tab open.');
 
       while (!operation.done) {
         await new Promise(resolve => setTimeout(resolve, 10000));
         operation = await ai.operations.getVideosOperation({ operation });
       }
 
-      setLoadingMessage('Video generado. Descargando...');
+      setLoadingMessage('Video generated. Downloading...');
 
       const downloadLink = operation.response?.generatedVideos?.[0]?.video?.uri;
       if (downloadLink) {
@@ -130,14 +130,14 @@ export const VideoGenerator: React.FC = () => {
         const videoUrl = URL.createObjectURL(videoBlob);
         setGeneratedVideoUrl(videoUrl);
       } else {
-        throw new Error('No se pudo obtener el enlace de descarga del video.');
+        throw new Error('Could not obtain video download link.');
       }
 
     } catch (e: any) {
       console.error(e);
-      let errorMessage = 'Hubo un error al generar el video. Por favor, inténtalo de nuevo.';
+      let errorMessage = 'There was an error generating the video. Please try again.';
       if (e.message?.includes('Requested entity was not found')) {
-        errorMessage = "Error de autenticación. Por favor, selecciona tu clave API de nuevo.";
+        errorMessage = "Authentication error. Please select your API key again.";
         setHasApiKey(false);
       }
       setError(errorMessage);
@@ -158,16 +158,16 @@ export const VideoGenerator: React.FC = () => {
   if (!hasApiKey) {
     return (
         <div className="bg-gray-800/50 border border-gray-700 p-6 rounded-lg shadow-lg max-w-4xl mx-auto text-center">
-            <h3 className="text-xl font-semibold text-white mb-4">Se requiere una clave API</h3>
-            <p className="text-gray-400 mb-6">Para usar la generación de video, debes seleccionar una clave API de Vertex AI. El uso de esta función puede incurrir en costos.</p>
+            <h3 className="text-xl font-semibold text-white mb-4">API Key Required</h3>
+            <p className="text-gray-400 mb-6">To use video generation, you must select a Vertex AI API key. Using this feature may incur costs.</p>
             <button
                 onClick={handleSelectKey}
                 className="bg-cyan-600 text-white font-bold py-2 px-6 rounded-md hover:bg-cyan-500 transition-colors"
             >
-                Seleccionar Clave API
+                Select API Key
             </button>
             <p className="text-xs text-gray-500 mt-4">
-                Para más información, consulta la <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noopener noreferrer" className="underline hover:text-cyan-400">documentación de facturación</a>.
+                For more information, see the <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noopener noreferrer" className="underline hover:text-cyan-400">billing documentation</a>.
             </p>
         </div>
     );
@@ -194,7 +194,7 @@ export const VideoGenerator: React.FC = () => {
               ) : (
                 <div className="text-center text-gray-500 cursor-pointer" onClick={() => fileInputRef.current?.click()}>
                   <PhotoIcon className="w-16 h-16 mx-auto" />
-                  <p>Haz clic para subir una imagen</p>
+                  <p>Click to upload an image</p>
                 </div>
               )}
             </>
@@ -205,7 +205,7 @@ export const VideoGenerator: React.FC = () => {
         <div className="flex flex-col space-y-4">
           <div>
             <label htmlFor="video-prompt" className="block text-sm font-medium text-gray-300 mb-2">
-              Describe la animación:
+              Describe the animation:
             </label>
             <textarea
               id="video-prompt"
@@ -213,17 +213,17 @@ export const VideoGenerator: React.FC = () => {
               onChange={(e) => setPrompt(e.target.value)}
               rows={3}
               className="w-full bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              placeholder="Ej: El coche se aleja a toda velocidad."
+              placeholder="E.g.: The car speeds away."
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
-              Formato del video:
+              Video format:
             </label>
             <div className="flex space-x-4">
               <label className="flex items-center">
                 <input type="radio" name="aspectRatio" value="16:9" checked={aspectRatio === '16:9'} onChange={() => setAspectRatio('16:9')} className="form-radio bg-gray-900 text-cyan-500" />
-                <span className="ml-2 text-sm">16:9 (Panorámico)</span>
+                <span className="ml-2 text-sm">16:9 (Panoramic)</span>
               </label>
               <label className="flex items-center">
                 <input type="radio" name="aspectRatio" value="9:16" checked={aspectRatio === '9:16'} onChange={() => setAspectRatio('9:16')} className="form-radio bg-gray-900 text-cyan-500" />
@@ -237,7 +237,7 @@ export const VideoGenerator: React.FC = () => {
             className="w-full bg-violet-600 text-white font-bold py-2 px-4 rounded-md hover:bg-violet-500 disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
           >
             {loading ? <SpinnerIcon className="w-5 h-5 mr-2" /> : <VideoCameraIcon className="w-5 h-5 mr-2" />}
-            {loading ? 'Generando...' : 'Generar Video'}
+            {loading ? 'Generating...' : 'Generate Video'}
           </button>
         </div>
       </div>

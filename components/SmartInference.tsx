@@ -69,31 +69,31 @@ export const SmartInference: React.FC = () => {
   return (
     <div className="bg-gray-800 rounded-lg p-6 max-w-4xl mx-auto">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-green-400 mb-2">🧠 SmartInference - ValidadorCriterio</h3>
-        <p className="text-gray-400">Validación semántica ligera con similitud vectorial</p>
+        <h3 className="text-2xl font-bold text-green-400 mb-2">🧠 SmartInference - CriteriaValidator</h3>
+        <p className="text-gray-400">Lightweight semantic validation with vector similarity</p>
       </div>
 
       {/* Inputs */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className="bg-gray-900 rounded-lg p-4">
-          <h4 className="font-bold text-blue-400 mb-3">🤖 Predicción IA (Hemisferio A)</h4>
+          <h4 className="font-bold text-blue-400 mb-3">🤖 AI Prediction (Hemisphere A)</h4>
           <textarea
             value={iaPrediccion}
             onChange={(e) => setIaPrediccion(e.target.value)}
             className="w-full bg-gray-700 text-white px-3 py-2 rounded text-sm resize-none"
             rows={3}
-            placeholder="Predicción generada por IA..."
+            placeholder="AI-generated prediction..."
           />
         </div>
 
         <div className="bg-gray-900 rounded-lg p-4">
-          <h4 className="font-bold text-yellow-400 mb-3">👤 Lección Humana (Corrección Experta)</h4>
+          <h4 className="font-bold text-yellow-400 mb-3">👤 Human Lesson (Expert Correction)</h4>
           <textarea
             value={humanLesson}
             onChange={(e) => setHumanLesson(e.target.value)}
             className="w-full bg-gray-700 text-white px-3 py-2 rounded text-sm resize-none"
             rows={3}
-            placeholder="Corrección del experto humano..."
+            placeholder="Human expert correction..."
           />
         </div>
       </div>

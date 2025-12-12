@@ -38,18 +38,18 @@ export const SynapticDiagram: React.FC = () => {
     const [activePath, setActivePath] = React.useState(0);
 
     const paths = [
-        [ 'Entrada', 'Criterio' ],
-        [ 'Criterio', 'REC', 'Explicador' ],
-        [ 'Explicador', 'Usuario' ],
-        [ 'Usuario', 'RL', 'Criterio' ],
+        [ 'Input', 'Criteria' ],
+        [ 'Criteria', 'CER', 'Explainer' ],
+        [ 'Explainer', 'User' ],
+        [ 'User', 'RL', 'Criteria' ],
     ];
 
     const neurons: { [key: string]: { x: number, y: number } } = {
-        'Entrada': { x: 50, y: 150 },
-        'Criterio': { x: 200, y: 150 },
-        'REC': { x: 350, y: 80 },
-        'Explicador': { x: 500, y: 150 },
-        'Usuario': { x: 650, y: 150 },
+        'Input': { x: 50, y: 150 },
+        'Criteria': { x: 200, y: 150 },
+        'CER': { x: 350, y: 80 },
+        'Explainer': { x: 500, y: 150 },
+        'User': { x: 650, y: 150 },
         'RL': { x: 350, y: 220 },
     };
 
@@ -73,9 +73,9 @@ export const SynapticDiagram: React.FC = () => {
     }, [paths.length]);
 
   return (
-    <Card title="Diagrama Sináptico Interactivo">
+    <Card title="Interactive Synaptic Diagram">
         <p className="text-sm text-gray-400 mb-6">
-            Visualización del flujo de información a través de los componentes cognitivos. El camino activo se ilumina.
+            Visualization of information flow through cognitive components. The active path lights up.
         </p>
         <div className="bg-gray-900/50 p-4 rounded-lg flex justify-center items-center">
             <svg viewBox="0 0 700 300" className="w-full h-auto">
@@ -89,12 +89,12 @@ export const SynapticDiagram: React.FC = () => {
                 </defs>
 
                 {/* Synapses */}
-                <Synapse x1={neurons['Entrada'].x} y1={neurons['Entrada'].y} x2={neurons['Criterio'].x} y2={neurons['Criterio'].y} active={isSynapseActive('Entrada', 'Criterio')} />
-                <Synapse x1={neurons['Criterio'].x} y1={neurons['Criterio'].y} x2={neurons['REC'].x} y2={neurons['REC'].y} active={isSynapseActive('Criterio', 'REC')} />
-                <Synapse x1={neurons['REC'].x} y1={neurons['REC'].y} x2={neurons['Explicador'].x} y2={neurons['Explicador'].y} active={isSynapseActive('REC', 'Explicador')} />
-                <Synapse x1={neurons['Explicador'].x} y1={neurons['Explicador'].y} x2={neurons['Usuario'].x} y2={neurons['Usuario'].y} active={isSynapseActive('Explicador', 'Usuario')} />
-                <Synapse x1={neurons['Usuario'].x} y1={neurons['Usuario'].y} x2={neurons['RL'].x} y2={neurons['RL'].y} active={isSynapseActive('Usuario', 'RL')} />
-                <Synapse x1={neurons['RL'].x} y1={neurons['RL'].y} x2={neurons['Criterio'].x} y2={neurons['Criterio'].y} active={isSynapseActive('RL', 'Criterio')} />
+                <Synapse x1={neurons['Input'].x} y1={neurons['Input'].y} x2={neurons['Criteria'].x} y2={neurons['Criteria'].y} active={isSynapseActive('Input', 'Criteria')} />
+                <Synapse x1={neurons['Criteria'].x} y1={neurons['Criteria'].y} x2={neurons['CER'].x} y2={neurons['CER'].y} active={isSynapseActive('Criteria', 'CER')} />
+                <Synapse x1={neurons['CER'].x} y1={neurons['CER'].y} x2={neurons['Explainer'].x} y2={neurons['Explainer'].y} active={isSynapseActive('CER', 'Explainer')} />
+                <Synapse x1={neurons['Explainer'].x} y1={neurons['Explainer'].y} x2={neurons['User'].x} y2={neurons['User'].y} active={isSynapseActive('Explainer', 'User')} />
+                <Synapse x1={neurons['User'].x} y1={neurons['User'].y} x2={neurons['RL'].x} y2={neurons['RL'].y} active={isSynapseActive('User', 'RL')} />
+                <Synapse x1={neurons['RL'].x} y1={neurons['RL'].y} x2={neurons['Criteria'].x} y2={neurons['Criteria'].y} active={isSynapseActive('RL', 'Criteria')} />
                 
                 {/* Neurons */}
                 {Object.entries(neurons).map(([label, coords]) => (

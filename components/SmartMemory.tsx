@@ -39,7 +39,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
     {
       id: '1',
       area: 'SAR_Analysis',
-      pattern: 'Detección de cambios en vegetación usando polarización VV',
+      pattern: 'Detection of vegetation changes using VV polarization',
       confidence: 0.92,
       impact: 0.85,
       timestamp: '2025-11-03T10:30:00Z',
@@ -49,7 +49,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
     {
       id: '2',
       area: 'Image_Processing',
-      pattern: 'Segmentación de nubes en imágenes multiespectrales',
+      pattern: 'Cloud segmentation in multispectral images',
       confidence: 0.78,
       impact: 0.73,
       timestamp: '2025-11-03T09:15:00Z',
@@ -59,7 +59,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
     {
       id: '3',
       area: 'Education_Strategy',
-      pattern: 'Explicación adaptativa para nivel principiante',
+      pattern: 'Adaptive explanation for beginner level',
       confidence: 0.95,
       impact: 0.91,
       timestamp: '2025-11-03T08:45:00Z',
@@ -69,7 +69,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
     {
       id: '4',
       area: 'Hackathon_Demo',
-      pattern: 'Integración Raindrop + Vultr + Google Cloud exitosa',
+      pattern: 'Successful Raindrop + Vultr + Google Cloud integration',
       confidence: 0.88,
       impact: 0.94,
       timestamp: '2025-11-03T11:00:00Z',
@@ -86,7 +86,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
     setLoading(true);
     try {
       if (raindropMode) {
-        console.log('🔗 Conectando con Raindrop SmartMemory via Vultr...');
+        console.log('🔗 Connecting to Raindrop SmartMemory via Vultr...');
         console.log('📡 Vultr Proxy:', vultrProxyUrl);
         console.log('🎯 Raindrop Endpoint:', apiEndpoint);
         console.log('🔑 API Key:', 'MERS-IASi-STUDY');
@@ -105,15 +105,15 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
         
         if (response.ok) {
           const data = await response.json();
-          console.log('✅ Datos reales de Raindrop recibidos:', data);
+          console.log('✅ Real data from Raindrop received:', data);
           setExperiences(data.experiences || mockExperiences);
           calculateStats(data.experiences || mockExperiences);
           return;
         } else {
-          console.warn('⚠️ Raindrop API no disponible, usando datos mock');
+          console.warn('⚠️ Raindrop API not available, using mock data');
         }
       } catch (apiError) {
-        console.warn('⚠️ Error conectando con Raindrop, usando fallback:', apiError);
+        console.warn('⚠️ Error connecting to Raindrop, using fallback:', apiError);
       }
       
       // Por ahora, simulamos la carga con delay realista
@@ -124,7 +124,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
       calculateStats(data);
       
       if (raindropMode) {
-        console.log('✅ SmartMemory cargado via arquitectura híbrida');
+        console.log('✅ SmartMemory loaded via hybrid architecture');
       }
     } catch (error) {
       console.error('Error loading experiences:', error);
@@ -160,8 +160,8 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
       <div className="flex items-center mb-6">
         <DatabaseIcon className="w-8 h-8 text-yellow-400 mr-3" />
         <div>
-          <h3 className="text-xl font-bold text-yellow-300">SmartMemory - REC Inspector</h3>
-          <p className="text-gray-400 text-sm">Repositorio de Experiencias Contextuales en tiempo real</p>
+          <h3 className="text-xl font-bold text-yellow-300">SmartMemory - CER Inspector</h3>
+          <p className="text-gray-400 text-sm">Contextual Experience Repository in real-time</p>
         </div>
       </div>
 
@@ -169,19 +169,19 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-gray-900/50 p-3 rounded-lg text-center">
           <div className="text-2xl font-bold text-cyan-400">{stats.total}</div>
-          <div className="text-xs text-gray-400">Experiencias Total</div>
+          <div className="text-xs text-gray-400">Total Experiences</div>
         </div>
         <div className="bg-gray-900/50 p-3 rounded-lg text-center">
           <div className="text-2xl font-bold text-green-400">{stats.humanLessons}</div>
-          <div className="text-xs text-gray-400">Lecciones Humanas</div>
+          <div className="text-xs text-gray-400">Human Lessons</div>
         </div>
         <div className="bg-gray-900/50 p-3 rounded-lg text-center">
           <div className="text-2xl font-bold text-blue-400">{stats.aiPredictions}</div>
-          <div className="text-xs text-gray-400">Predicciones IA</div>
+          <div className="text-xs text-gray-400">AI Predictions</div>
         </div>
         <div className="bg-gray-900/50 p-3 rounded-lg text-center">
           <div className="text-2xl font-bold text-purple-400">{(stats.avgConfidence * 100).toFixed(1)}%</div>
-          <div className="text-xs text-gray-400">Confianza Promedio</div>
+          <div className="text-xs text-gray-400">Average Confidence</div>
         </div>
       </div>
 
@@ -189,7 +189,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
       <div className="flex flex-col md:flex-row gap-4 mb-4">
         <input
           type="text"
-          placeholder="Buscar experiencias..."
+          placeholder="Search experiences..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="flex-1 bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-500"
@@ -198,11 +198,11 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
           value={selectedArea}
           onChange={(e) => setSelectedArea(e.target.value)}
           className="bg-gray-900 border border-gray-600 rounded-md p-2 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-          title="Filtrar por área"
+          title="Filter by area"
         >
           {areas.map(area => (
             <option key={area} value={area}>
-              {area === 'all' ? 'Todas las áreas' : String(area).replace('_', ' ')}
+              {area === 'all' ? 'All areas' : String(area).replace('_', ' ')}
             </option>
           ))}
         </select>
@@ -212,7 +212,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
           className="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-500 disabled:opacity-50 flex items-center"
         >
           {loading ? <SpinnerIcon className="w-4 h-4 mr-2" /> : null}
-          Actualizar
+          Refresh
         </button>
       </div>
 
@@ -221,12 +221,12 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
         {loading ? (
           <div className="text-center py-8">
             <SpinnerIcon className="w-8 h-8 mx-auto mb-2" />
-            <p className="text-gray-400">Cargando experiencias del REC...</p>
+            <p className="text-gray-400">Loading experiences from CER...</p>
           </div>
         ) : filteredExperiences.length === 0 ? (
           <div className="text-center py-8 text-gray-400">
             <DatabaseIcon className="w-12 h-12 mx-auto mb-2 opacity-50" />
-            <p>No se encontraron experiencias</p>
+            <p>No experiences found</p>
           </div>
         ) : (
           filteredExperiences.map((exp) => (
@@ -242,7 +242,7 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
                   <span className={`text-xs px-2 py-1 rounded ${
                     exp.source === 'human' ? 'bg-green-900/30 text-green-400' : 'bg-blue-900/30 text-blue-400'
                   }`}>
-                    {exp.source === 'human' ? '👤 Humano' : '🤖 IA'}
+                    {exp.source === 'human' ? '👤 Human' : '🤖 AI'}
                   </span>
                 </div>
               </div>
@@ -251,8 +251,8 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
               
               <div className="flex justify-between items-center text-xs text-gray-400">
                 <div className="flex space-x-4">
-                  <span>Confianza: <span className="text-cyan-400">{(exp.confidence * 100).toFixed(1)}%</span></span>
-                  <span>Impacto: <span className="text-purple-400">{(exp.impact * 100).toFixed(1)}%</span></span>
+                  <span>Confidence: <span className="text-cyan-400">{(exp.confidence * 100).toFixed(1)}%</span></span>
+                  <span>Impact: <span className="text-purple-400">{(exp.impact * 100).toFixed(1)}%</span></span>
                 </div>
                 <span>{new Date(exp.timestamp).toLocaleString()}</span>
               </div>
@@ -263,10 +263,10 @@ export const SmartMemory: React.FC<SmartMemoryProps> = ({
 
       {/* Connection Indicator */}
       <div className="mt-4 pt-4 border-t border-gray-700 flex items-center justify-between text-xs text-gray-500">
-        <span>Conectado a: {apiEndpoint}</span>
+        <span>Connected to: {apiEndpoint}</span>
         <div className="flex items-center">
           <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-          <span>REC Activo</span>
+          <span>CER Active</span>
         </div>
       </div>
     </div>

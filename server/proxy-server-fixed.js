@@ -80,104 +80,104 @@ app.get('/api/health', (req, res) => {
 const getFallbackResponse = (prompt) => {
   const lower = prompt.toLowerCase();
   
-  if (lower.includes('mers') || lower.includes('qué es')) {
-    return `MERS (Módulo Inteligente de Retroalimentación Educativa Selectiva) es un sistema de enseñanza adaptativa con arquitectura cognitiva hemisférica diseñado para The AI Championship 2025.
+  if (lower.includes('mers') || lower.includes('what is')) {
+    return `MERS (Selective Educational Feedback Intelligence Module) is an adaptive teaching system with hemispheric cognitive architecture designed for The AI Championship 2025.
 
-🧠 **Arquitectura Hemisférica:**
-- **Hemisferio A**: Razón Técnica - Procesa datos complejos (SAR, imágenes)
-- **Hemisferio B**: Conciencia Pedagógica - Valida, almacena y explica conocimiento
+🧠 **Hemispheric Architecture:**
+- **Hemisphere A**: Technical Reason - Processes complex data (SAR, images)
+- **Hemisphere B**: Pedagogical Consciousness - Validates, stores and explains knowledge
 
-🔑 **Componente ValidadorCriterio:**
+🔑 **CriteriaValidator Component:**
 \`\`\`
-score = 0.5 * Confianza + 0.4 * Coherencia + 0.1 * Impacto
-// Acepta experiencias con score > 0.7
+score = 0.5 * Confidence + 0.4 * Coherence + 0.1 * Impact
+// Accepts experiences with score > 0.7
 \`\`\`
 
-📊 **REC (Repositorio de Experiencias Contextuales):**
-Sistema de memoria que almacena patrones pedagógicos validados para aprendizaje continuo.
+📊 **CER (Contextual Experience Repository):**
+Memory system that stores validated pedagogical patterns for continuous learning.
 
-Este es un prototipo funcional para The Scientific Bumblebees_IASi Study.`;
+This is a functional prototype for The Scientific Bumblebees_IASi Study.`;
   }
   
-  if (lower.includes('validador') || lower.includes('criterio')) {
-    return `El **ValidadorCriterio** es la neurona ejecutiva del Hemisferio B de MERS. Evalúa cada lección humana con 3 métricas:
+  if (lower.includes('validador') || lower.includes('criterio') || lower.includes('validator') || lower.includes('criteria')) {
+    return `The **CriteriaValidator** is the executive neuron of MERS' Hemisphere B. It evaluates each human lesson with 3 metrics:
 
-1. **Confianza (50%)**: ¿Qué tan seguro está el experto?
-2. **Coherencia (40%)**: ¿Es consistente con el conocimiento previo?
-3. **Impacto (10%)**: ¿Qué tan útil es para el aprendizaje?
+1. **Confidence (50%)**: How sure is the expert?
+2. **Coherence (40%)**: Is it consistent with prior knowledge?
+3. **Impact (10%)**: How useful is it for learning?
 
-Fórmula: \`score = 0.5*confianza + 0.4*coherencia + 0.1*impacto\`
+Formula: \`score = 0.5*confidence + 0.4*coherence + 0.1*impact\`
 
-Solo las lecciones con score > 0.7 se almacenan en el REC (Repositorio de Experiencias Contextuales).`;
+Only lessons with score > 0.7 are stored in the CER (Contextual Experience Repository).`;
   }
   
-  if (lower.includes('hemisferio') || lower.includes('arquitectura')) {
-    return `La arquitectura hemisférica de MERS simula un cerebro digital:
+  if (lower.includes('hemisferio') || lower.includes('arquitectura') || lower.includes('hemisphere') || lower.includes('architecture')) {
+    return `MERS's hemispheric architecture simulates a digital brain:
 
-**Hemisferio A (Razón Técnica):**
-- Procesa imágenes SAR con Gemini Vision
-- Genera predicciones técnicas
-- Análisis multimodal
+**Hemisphere A (Technical Reason):**
+- Processes SAR images with Gemini Vision
+- Generates technical predictions
+- Multimodal analysis
 
-**Hemisferio B (Conciencia Pedagógica - MERS):**
-- ValidadorCriterio evalúa lecciones humanas
-- REC almacena conocimiento validado
-- Explicador Digital adapta el lenguaje al usuario
-- Aprendizaje Reforzado mejora con feedback
+**Hemisphere B (Pedagogical Consciousness - MERS):**
+- CriteriaValidator evaluates human lessons
+- CER stores validated knowledge
+- Digital Explainer adapts language to user
+- Reinforcement Learning improves with feedback
 
-Esta simbiosis entre predicción técnica y corrección humana crea un sistema que aprende a enseñar.`;
+This symbiosis between technical prediction and human correction creates a system that learns to teach.`;
   }
   
-  if (lower.includes('rec') || lower.includes('repositorio')) {
-    return `El **REC (Repositorio de Experiencias Contextuales)** es la memoria a largo plazo de MERS.
+  if (lower.includes('rec') || lower.includes('repositorio') || lower.includes('cer') || lower.includes('repository')) {
+    return `The **CER (Contextual Experience Repository)** is MERS's long-term memory.
 
-🗄️ **Estructura:**
-- Lecciones validadas (score > 0.7)
-- Patrones pedagógicos exitosos
-- Correlaciones entre contextos
-- Estrategias de explicación efectivas
+🗄️ **Structure:**
+- Validated lessons (score > 0.7)
+- Successful pedagogical patterns
+- Correlations between contexts
+- Effective explanation strategies
 
-🔍 **Funciones:**
-- Almacenamiento persistente (MongoDB)
-- Búsqueda por similitud vectorial
-- Clustering de experiencias relacionadas
-- Recuperación contextual inteligente
+🔍 **Functions:**
+- Persistent storage (MongoDB)
+- Vector similarity search
+- Clustering of related experiences
+- Intelligent contextual retrieval
 
-El REC permite que MERS mejore continuamente, aprendiendo de cada interacción humana validada.`;
+The CER allows MERS to continuously improve, learning from each validated human interaction.`;
   }
   
   if (lower.includes('hackathon') || lower.includes('championship')) {
-    return `MERS está diseñado específicamente para **The AI Championship 2025** con las plataformas:
+    return `MERS is specifically designed for **The AI Championship 2025** with these platforms:
 
-🌐 **Raindrop Platform**: Frontend con SmartComponents
-🖥️ **Vultr**: Servidor proxy y API bridge
-☁️ **Google Cloud**: Motor de IA (Gemini 2.0 Flash)
+🌐 **Raindrop Platform**: Frontend with SmartComponents
+🖥️ **Vultr**: Proxy server and API bridge
+☁️ **Google Cloud**: AI engine (Gemini 2.0 Flash)
 
-**SmartComponent implementado:**
-- SmartMemory: Visualizador del REC en tiempo real
-- Dashboard de arquitectura híbrida
-- Monitoreo de conexiones entre plataformas
+**Implemented SmartComponent:**
+- SmartMemory: Real-time CER visualizer
+- Hybrid architecture dashboard
+- Cross-platform connection monitoring
 
-Categoría: Emprendedor Individual + Mejor Idea General
-Creadora: Roxana A. Salazar M. (Luciérnaga Sabionda)`;
+Category: Individual Entrepreneur + Best Overall Idea
+Creator: Roxana A. Salazar M. (The Smart Firefly)`;
   }
   
-  return `Soy el asistente de MERS-IASi. Puedo ayudarte con:
+  return `I'm the MERS-IASi assistant. I can help you with:
 
-📚 Arquitectura cognitiva hemisférica
-🧠 ValidadorCriterio y métricas de evaluación
-💾 REC (Repositorio de Experiencias Contextuales)
-🏆 Integración Raindrop + Vultr + Google Cloud
-📊 SmartComponents y visualización
+📚 Hemispheric cognitive architecture
+🧠 CriteriaValidator and evaluation metrics
+💾 CER (Contextual Experience Repository)
+🏆 Raindrop + Vultr + Google Cloud integration
+📊 SmartComponents and visualization
 
-¿Sobre qué aspecto de MERS te gustaría aprender más?`;
+Which aspect of MERS would you like to learn more about?`;
 };
 
 // Generate endpoint
 app.post('/api/generate', async (req, res) => {
   const prompt = req.body?.prompt || '';
   
-  // Si no hay cliente, usar respuestas inteligentes locales
+  // If no client, use smart local responses
   if (!client || !API_KEY) {
     console.log('⚠️  Using fallback response (no API key)');
     return res.json({ text: getFallbackResponse(prompt), fallback: true });
@@ -186,7 +186,7 @@ app.post('/api/generate', async (req, res) => {
   try {
     const model = client.getGenerativeModel({
       model: 'gemini-1.5-pro',
-      systemInstruction: 'Eres un asistente de IA para el proyecto MERS-IASi. Responde de forma clara y concisa sobre arquitectura cognitiva, ValidadorCriterio, REC y The AI Championship 2025.'
+      systemInstruction: 'You are an AI assistant for the MERS-IASi project. Respond clearly and concisely about cognitive architecture, CriteriaValidator, CER, and The AI Championship 2025.'
     });
 
     const result = await model.generateContent(prompt);
@@ -197,7 +197,7 @@ app.post('/api/generate', async (req, res) => {
     res.json({ text, source: 'gemini' });
   } catch (err) {
     console.error('❌ Gemini error, using fallback:', err.message);
-    // En caso de error de cuota, usar fallback
+    // In case of quota error, use fallback
     res.json({ text: getFallbackResponse(prompt), fallback: true, error: err.message });
   }
 });
@@ -206,7 +206,7 @@ app.post('/api/generate', async (req, res) => {
 app.post('/api/chat', async (req, res) => {
   const prompt = req.body?.prompt || '';
   
-  // Si no hay cliente, usar respuestas inteligentes locales
+  // If no client, use smart local responses
   if (!client || !API_KEY) {
     console.log('⚠️  Using fallback response (no API key)');
     return res.json({ text: getFallbackResponse(prompt), fallback: true });
@@ -215,7 +215,7 @@ app.post('/api/chat', async (req, res) => {
   try {
     const model = client.getGenerativeModel({
       model: 'gemini-1.5-pro',
-      systemInstruction: 'Eres un asistente de IA para el proyecto MERS-IASi. Responde de forma clara y concisa sobre arquitectura cognitiva, ValidadorCriterio, REC y The AI Championship 2025.'
+      systemInstruction: 'You are an AI assistant for the MERS-IASi project. Respond clearly and concisely about cognitive architecture, CriteriaValidator, CER, and The AI Championship 2025.'
     });
 
     const result = await model.generateContent(prompt);
@@ -226,7 +226,7 @@ app.post('/api/chat', async (req, res) => {
     res.json({ text, source: 'gemini' });
   } catch (err) {
     console.error('❌ Gemini error, using fallback:', err.message);
-    // En caso de error de cuota, usar fallback inteligente
+    // In case of quota error, use smart fallback
     res.json({ text: getFallbackResponse(prompt), fallback: true, error: err.message });
   }
 });
@@ -236,12 +236,12 @@ app.post('/api/analyze-image', upload.single('image'), async (req, res) => {
   const startedAt = Date.now();
   try {
     if (!client || !API_KEY) {
-      return res.json({ text: 'Backend sin API key: usando explicación genérica. Sube una imagen y te describiré posibles contenidos.', fallback: true });
+      return res.json({ text: 'Backend without API key: using generic explanation. Upload an image and I will describe possible contents.', fallback: true });
     }
 
     const file = req.file;
     if (!file) {
-      return res.status(400).json({ error: 'No se recibió archivo de imagen' });
+      return res.status(400).json({ error: 'No image file received' });
     }
 
     const ai = client;
@@ -256,7 +256,7 @@ app.post('/api/analyze-image', upload.single('image'), async (req, res) => {
     };
 
     const result = await model.generateContent([
-      'Describe esta imagen en detalle y destaca elementos clave visibles.',
+      'Describe this image in detail and highlight key visible elements.',
       imagePart,
     ]);
     const response = await result.response;
@@ -265,15 +265,15 @@ app.post('/api/analyze-image', upload.single('image'), async (req, res) => {
     console.log(`🖼️ Analyze OK | type=${file.mimetype} size=${file.size}B duration=${durationMs}ms`);
     return res.json({ text, source: 'gemini' });
   } catch (err) {
-    const message = err?.message || 'Error desconocido';
-    const isUserError = message.includes('Tipo de archivo no permitido') || message.includes('File too large');
-    console.error('❌ Error analizando imagen:', message);
+    const message = err?.message || 'Unknown error';
+    const isUserError = message.includes('File type not allowed') || message.includes('File too large');
+    console.error('❌ Error analyzing image:', message);
     const file = req.file;
     if (file) {
       const durationMs = Date.now() - startedAt;
       console.log(`🖼️ Analyze FAIL | type=${file.mimetype} size=${file.size}B duration=${durationMs}ms reason=${message}`);
     }
-    return res.status(isUserError ? 400 : 500).json({ error: isUserError ? 'Solicitud inválida' : 'Error al analizar la imagen', message });
+    return res.status(isUserError ? 400 : 500).json({ error: isUserError ? 'Invalid request' : 'Error analyzing image', message });
   }
 });
 
@@ -282,15 +282,15 @@ app.post('/api/raindrop/tool', async (req, res) => {
   const { toolName, args } = req.body;
   
   if (!toolName) {
-    return res.status(400).json({ error: 'toolName requerido' });
+    return res.status(400).json({ error: 'toolName required' });
   }
 
   try {
     const raindropStatus = getRaindropStatus();
     if (!raindropStatus.connected) {
       return res.status(503).json({ 
-        error: 'Raindrop MCP no conectado', 
-        message: 'El servidor MCP de Raindrop no está disponible'
+        error: 'Raindrop MCP not connected', 
+        message: 'Raindrop MCP server is not available'
       });
     }
 
@@ -302,9 +302,9 @@ app.post('/api/raindrop/tool', async (req, res) => {
       source: 'raindrop-mcp'
     });
   } catch (err) {
-    console.error('❌ Error llamando Raindrop tool:', err);
+    console.error('❌ Error calling Raindrop tool:', err);
     res.status(500).json({ 
-      error: 'Error ejecutando SmartComponent', 
+      error: 'Error executing SmartComponent', 
       message: err.message 
     });
   }
@@ -317,12 +317,12 @@ const server = app.listen(PORT, '0.0.0.0', async () => {
   console.log(`📊 Status: ${client ? '✅ Ready' : '⚠️  API key missing'}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
   
-  // Inicializar Raindrop MCP
+  // Initialize Raindrop MCP
   try {
     await initRaindropMCP();
-    console.log('🌧️ Raindrop MCP integrado exitosamente');
+    console.log('🌧️ Raindrop MCP integrated successfully');
   } catch (error) {
-    console.warn('⚠️  Raindrop MCP no disponible (continuando sin él):', error.message);
+    console.warn('⚠️  Raindrop MCP not available (continuing without it):', error.message);
   }
 });
 

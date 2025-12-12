@@ -26,19 +26,19 @@ export const FlowDiagram: React.FC = () => {
         <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                 {/* 3.2.1 Capa de Entrada */}
-                <Card title="3.2.1 Capa de Entrada y Preprocesamiento" className="border-blue-500/50">
+                <Card title="3.2.1 Input and Preprocessing Layer" className="border-blue-500/50">
                     <CogIcon className="w-8 h-8 text-blue-400 mb-3" />
-                    <p>Recibe, normaliza y vectoriza la información de la IA (Hemisferio A) y del usuario (feedback).</p>
+                    <p>Receives, normalizes and vectorizes information from AI (Hemisphere A) and user (feedback).</p>
                     <div className="mt-4 space-y-2 text-sm">
-                        <p><strong className="text-blue-300">Input:</strong> <span className="font-mono">PrediccionIASi</span>, <span className="font-mono">LeccionHumana</span></p>
-                        <p><strong className="text-blue-300">Output:</strong> Vector combinado <span className="font-mono">V_entrada</span></p>
+                        <p><strong className="text-blue-300">Input:</strong> <span className="font-mono">IASiPrediction</span>, <span className="font-mono">HumanLesson</span></p>
+                        <p><strong className="text-blue-300">Output:</strong> Combined vector <span className="font-mono">V_input</span></p>
                     </div>
                 </Card>
 
                 {/* 3.2.2 ValidadorCriterio */}
-                <Card title="3.2.2 ValidadorCriterio (Neurona Ejecutiva)" className="border-green-500/50">
+                <Card title="3.2.2 CriteriaValidator (Executive Neuron)" className="border-green-500/50">
                     <ScaleIcon className="w-8 h-8 text-green-400 mb-3" />
-                    <p>Centro decisor que determina qué conocimiento merece ser almacenado y utilizado para enseñar.</p>
+                    <p>Decision center that determines which knowledge deserves to be stored and used for teaching.</p>
                      <div className="mt-4 text-sm font-mono bg-gray-800 p-3 rounded-md">
                         <span className="text-green-300">score</span> = 0.5*C<sub>conf</sub> + 0.4*C<sub>coh</sub> + 0.1*C<sub>imp</sub>
                         <br/>
@@ -47,32 +47,32 @@ export const FlowDiagram: React.FC = () => {
                 </Card>
                 
                 {/* 3.2.3 REC */}
-                <Card title="3.2.3 Repositorio de Experiencias Contextuales (REC)" className="border-yellow-500/50">
+                <Card title="3.2.3 Contextual Experience Repository (CER)" className="border-yellow-500/50">
                     <DatabaseIcon className="w-8 h-8 text-yellow-400 mb-3" />
-                    <p>Memoria a largo plazo. Almacena lecciones validadas como experiencias reutilizables.</p>
+                    <p>Long-term memory. Stores validated lessons as reusable experiences.</p>
                      <div className="mt-4 space-y-2 text-sm">
-                       <p><strong className="text-yellow-300">Indexación:</strong> Área, Patrón disparador.</p>
-                       <p><strong className="text-yellow-300">Tecnología:</strong> MongoDB, Vector DB.</p>
+                       <p><strong className="text-yellow-300">Indexing:</strong> Area, Trigger pattern.</p>
+                       <p><strong className="text-yellow-300">Technology:</strong> MongoDB, Vector DB.</p>
                     </div>
                 </Card>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                  {/* 3.2.4 Explicador Digital */}
-                <Card title="3.2.4 Explicador Digital (Patrón Strategy)" className="border-purple-500/50">
+                <Card title="3.2.4 Digital Explainer (Strategy Pattern)" className="border-purple-500/50">
                     <LightBulbIcon className="w-8 h-8 text-purple-400 mb-3" />
-                    <p>Genera explicaciones adaptadas al nivel de comprensión del usuario.</p>
+                    <p>Generates explanations adapted to the user's comprehension level.</p>
                     <div className="mt-4 space-y-2 text-sm">
-                       <p><strong className="text-purple-300">Principiante:</strong> Lenguaje simple.</p>
-                       <p><strong className="text-purple-300">Intermedio:</strong> Ejemplos aplicados.</p>
-                       <p><strong className="text-purple-300">Avanzado:</strong> Métricas técnicas.</p>
+                       <p><strong className="text-purple-300">Beginner:</strong> Simple language.</p>
+                       <p><strong className="text-purple-300">Intermediate:</strong> Applied examples.</p>
+                       <p><strong className="text-purple-300">Advanced:</strong> Technical metrics.</p>
                     </div>
                 </Card>
 
                 {/* Interacción Usuario */}
-                <Card title="Interacción con el Usuario" className="border-red-500/50">
+                <Card title="User Interaction" className="border-red-500/50">
                     <UsersIcon className="w-8 h-8 text-red-400 mb-3" />
-                    <p>El usuario recibe la explicación y proporciona retroalimentación (positiva o negativa).</p>
+                    <p>The user receives the explanation and provides feedback (positive or negative).</p>
                     <div className="mt-4 flex justify-around">
                         <span className="text-green-400 font-bold text-2xl">+1</span>
                         <span className="text-red-400 font-bold text-2xl">-1</span>
@@ -80,12 +80,12 @@ export const FlowDiagram: React.FC = () => {
                 </Card>
 
                 {/* 3.2.5 Aprendizaje Reforzado */}
-                <Card title="3.2.5 Aprendizaje Reforzado (RL)" className="border-teal-500/50">
+                <Card title="3.2.5 Reinforcement Learning (RL)" className="border-teal-500/50">
                     <RecycleIcon className="w-8 h-8 text-teal-400 mb-3" />
-                    <p>Mecanismo de evolución cognitiva. Ajusta las estrategias pedagógicas según la recompensa del usuario.</p>
+                    <p>Cognitive evolution mechanism. Adjusts pedagogical strategies based on user reward.</p>
                     <div className="mt-4 space-y-2 text-sm">
-                       <p><strong className="text-teal-300">(+1):</strong> Fortalece patrón exitoso.</p>
-                       <p><strong className="text-teal-300">(-1):</strong> Disminuye uso o reentrena.</p>
+                       <p><strong className="text-teal-300">(+1):</strong> Strengthens successful pattern.</p>
+                       <p><strong className="text-teal-300">(-1):</strong> Decreases usage or retrains.</p>
                     </div>
                 </Card>
             </div>
