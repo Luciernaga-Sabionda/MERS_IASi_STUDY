@@ -10,7 +10,6 @@ import { ImageGenerator } from './components/ImageGenerator';
 import { VideoGenerator } from './components/VideoGenerator';
 import { SmartMemory } from './components/SmartMemory';
 import { Chatbot } from './components/Chatbot';
-import { HybridArchitectureDashboard } from './raindrop-integration/HybridArchitectureDashboard';
 import { BookOpenIcon, CodeIcon, CogIcon, EyeIcon, PhotoIcon, VideoCameraIcon, DatabaseIcon } from './components/Icons';
 
 function App() {
@@ -67,10 +66,6 @@ function App() {
         
         <Section title="Generación de Video con Veo" icon={<VideoCameraIcon className="w-8 h-8 md:w-10 md:h-10" />}>
             <VideoGenerator />
-        </Section>
-
-        <Section title="🏆 Demostración Hackathon - Arquitectura Híbrida" icon={<CogIcon className="w-8 h-8 md:w-10 md:h-10" />}>
-            <HybridArchitectureDashboard />
         </Section>
 
         <Section title="SmartMemory - REC Inspector" icon={<DatabaseIcon className="w-8 h-8 md:w-10 md:h-10" />}>
