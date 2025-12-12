@@ -10,6 +10,9 @@ import { ImageGenerator } from './components/ImageGenerator';
 import { VideoGenerator } from './components/VideoGenerator';
 import { SmartMemory } from './components/SmartMemory';
 import { Chatbot } from './components/Chatbot';
+import { VultrArchitecture } from './components/VultrArchitecture';
+import { RaindropDemo } from './components/RaindropDemo';
+import { SmartInference } from './components/SmartInference';
 import { BookOpenIcon, CodeIcon, CogIcon, EyeIcon, PhotoIcon, VideoCameraIcon, DatabaseIcon } from './components/Icons';
 
 function App() {
@@ -66,6 +69,27 @@ function App() {
         
         <Section title="Generación de Video con Veo" icon={<VideoCameraIcon className="w-8 h-8 md:w-10 md:h-10" />}>
             <VideoGenerator />
+        </Section>
+
+        <Section title="🏆 Arquitectura Vultr - Despliegue Backend" icon={<CogIcon className="w-8 h-8 md:w-10 md:h-10" />}>
+            <p className="max-w-3xl mx-auto text-center text-gray-400 mb-8">
+              Backend desplegado en <strong className="text-cyan-400">Vultr Cloud Compute</strong> para inferencia, persistencia del REC y proxy de APIs.
+            </p>
+            <VultrArchitecture />
+        </Section>
+
+        <Section title="🔗 Integración Raindrop MCP" icon={<CodeIcon className="w-8 h-8 md:w-10 md:h-10" />}>
+            <p className="max-w-3xl mx-auto text-center text-gray-400 mb-8">
+              Demostración en vivo de <strong className="text-purple-400">Model Context Protocol</strong> con 18 herramientas Raindrop.
+            </p>
+            <RaindropDemo />
+        </Section>
+
+        <Section title="🧠 SmartInference - ValidadorCriterio" icon={<CogIcon className="w-8 h-8 md:w-10 md:h-10" />}>
+            <p className="max-w-3xl mx-auto text-center text-gray-400 mb-8">
+              Validación semántica ligera para evaluar coherencia entre predicciones IA y lecciones humanas.
+            </p>
+            <SmartInference />
         </Section>
 
         <Section title="SmartMemory - REC Inspector" icon={<DatabaseIcon className="w-8 h-8 md:w-10 md:h-10" />}>
