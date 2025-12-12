@@ -61,7 +61,7 @@ app.post('/api/generate', async (req, res) => {
     if (!API_KEY) return res.status(500).send('Gemini API key not configured on server.');
 
     const model = client.getGenerativeModel({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
       systemInstruction: 'Eres un asistente de IA para el proyecto MERS-IASi. Responde de forma clara y concisa.'
     });
 
@@ -88,7 +88,7 @@ app.post('/api/chat', async (req, res) => {
     if (!API_KEY) return res.status(500).send('Gemini API key not configured on server.');
 
     const model = client.getGenerativeModel({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
       systemInstruction: 'Eres un asistente de IA para el proyecto MERS-IASi. Responde de forma clara y concisa.'
     });
 

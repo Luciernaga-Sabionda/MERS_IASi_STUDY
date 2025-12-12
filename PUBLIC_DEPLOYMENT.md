@@ -1,21 +1,21 @@
-# 🌐 Despliegue Público de MERS
+# 🌐 MERS Public Deployment
 
-## Frontend Público (GitHub Pages)
+## Public Frontend (GitHub Pages)
 **URL:** https://luciernaga-sabionda.github.io/MERS_IASi_STUDY/
 
-El frontend ya está configurado para GitHub Pages. El workflow automático desplegará después de cada push.
+The frontend is already configured for GitHub Pages. The automatic workflow will deploy after each push.
 
-## Backend en Vultr (REQUERIDO)
+## Backend on Vultr (REQUIRED)
 
-Para que el chatbot y las APIs funcionen, debes desplegar el backend en Vultr:
+For the chatbot and APIs to work, you must deploy the backend on Vultr:
 
-### Paso 1: Conectar por SSH
+### Step 1: Connect via SSH
 ```bash
 ssh root@207.148.31.144
 # Password: P%6gjRE!p[cjXj,W
 ```
 
-### Paso 2: Ejecutar instalación (copiar todo junto)
+### Step 2: Run installation (copy everything together)
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && \
 sudo apt-get install -y nodejs git && \
@@ -35,17 +35,17 @@ pm2 save && \
 pm2 startup
 ```
 
-### Paso 3: Verificar funcionamiento
+### Step 3: Verify operation
 ```bash
 curl http://localhost:3002/health
 ```
 
-## URLs Finales para Evaluadores
+## Final URLs for Evaluators
 
 - **Frontend:** https://luciernaga-sabionda.github.io/MERS_IASi_STUDY/
 - **Backend API:** http://207.148.31.144:3002/health
 
-Una vez desplegado el backend, actualiza `vite.config.ts` con:
+Once the backend is deployed, update `vite.config.ts` with:
 ```typescript
 proxy: {
   '/api': {
@@ -55,4 +55,4 @@ proxy: {
 }
 ```
 
-Y reconstruye: `npm run build && git add -A && git commit -m "Update backend URL" && git push`
+And rebuild: `npm run build && git add -A && git commit -m "Update backend URL" && git push`

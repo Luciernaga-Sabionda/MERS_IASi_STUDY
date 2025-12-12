@@ -4,6 +4,12 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/MERS_IASi_STUDY/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false
+  },
   server: {
     port: 5173,
     proxy: {
