@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
     const apiUrl = env.VITE_API_URL || 'http://localhost:3002';
     
     return {
-      base: './',
+      base: '/MERS_IASi_STUDY/',
       server: {
         port: 3000,
         host: '0.0.0.0',
